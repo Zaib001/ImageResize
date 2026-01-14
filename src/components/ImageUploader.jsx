@@ -80,7 +80,7 @@ const ImageUploader = () => {
                         onClick={() => fileInputRef.current?.click()}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
-                        className={`relative group border-2 border-dashed rounded-[28px] p-16 md:p-24 transition-all duration-700 cursor-pointer flex flex-col items-center justify-center space-y-8 overflow-hidden bg-white/[0.01]
+                        className={`relative group border-2 border-dashed rounded-[20px] md:rounded-[28px] p-8 md:p-24 transition-all duration-700 cursor-pointer flex flex-col items-center justify-center space-y-6 md:space-y-8 overflow-hidden bg-white/[0.01]
               ${isDragging
                                 ? 'border-indigo-500 bg-indigo-500/10 shadow-[inner_0_0_60px_rgba(79,70,229,0.15)]'
                                 : 'border-white/10 hover:border-white/25 hover:bg-white/[0.03]'}`}
@@ -98,42 +98,42 @@ const ImageUploader = () => {
                             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                             className="relative"
                         >
-                            <div className="w-24 h-24 bg-gradient-to-tr from-indigo-500/20 to-violet-500/20 rounded-[22px] flex items-center justify-center border border-white/10 group-hover:bg-indigo-500/30 transition-colors duration-500">
-                                <Upload className="w-10 h-10 text-indigo-400" />
+                            <div className="w-16 h-16 md:w-24 md:h-24 bg-gradient-to-tr from-indigo-500/20 to-violet-500/20 rounded-[18px] md:rounded-[22px] flex items-center justify-center border border-white/10 group-hover:bg-indigo-500/30 transition-colors duration-500">
+                                <Upload className="w-8 h-8 md:w-10 md:h-10 text-indigo-400" />
                             </div>
                             <motion.div
                                 initial={{ opacity: 0, scale: 0 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="absolute -top-2 -right-2 w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center border-4 border-[#0b0f19] shadow-xl"
+                                className="absolute -top-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-indigo-500 rounded-full flex items-center justify-center border-4 border-[#0b0f19] shadow-xl"
                             >
-                                <ChevronRight className="w-4 h-4 text-white" />
+                                <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-white" />
                             </motion.div>
                         </motion.div>
 
-                        <div className="text-center relative space-y-3">
-                            <h2 className="text-2xl font-black text-white tracking-tight uppercase">Upload Asset</h2>
-                            <p className="text-sm font-bold text-slate-500 tracking-wide uppercase">
+                        <div className="text-center relative space-y-2 md:space-y-3">
+                            <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase">Upload Asset</h2>
+                            <p className="text-xs md:text-sm font-bold text-slate-500 tracking-wide uppercase">
                                 Drag and drop or <span className="text-indigo-400">explore</span>
                             </p>
                         </div>
 
-                        <div className="pt-6 flex items-center space-x-10">
-                            <div className="flex -space-x-3">
+                        <div className="pt-4 md:pt-6 flex flex-col md:flex-row items-center gap-6 md:space-x-10">
+                            <div className="flex -space-x-2 md:-space-x-3">
                                 {['JPG', 'PNG', 'WEBP', 'GIF'].map((ext, i) => (
                                     <motion.div
                                         key={ext}
                                         initial={{ x: -10, opacity: 0 }}
                                         animate={{ x: 0, opacity: 1 }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="w-10 h-10 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover:border-indigo-500/40 transition-colors"
+                                        className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-black/40 border border-white/10 flex items-center justify-center text-[8px] md:text-[10px] font-black text-slate-400 group-hover:border-indigo-500/40 transition-colors"
                                     >
                                         {ext}
                                     </motion.div>
                                 ))}
                             </div>
-                            <div className="h-6 w-px bg-white/10" />
-                            <div className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 group-hover:text-slate-400 transition-colors">
-                                <Shield className="w-3 h-3" />
+                            <div className="hidden md:block h-6 w-px bg-white/10" />
+                            <div className="flex items-center space-x-2 text-[8px] md:text-[10px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-slate-600 group-hover:text-slate-400 transition-colors">
+                                <Shield className="w-2.5 h-2.5 md:w-3 md:h-3" />
                                 <span>SECURE ENCRYPTION</span>
                             </div>
                         </div>
@@ -144,19 +144,19 @@ const ImageUploader = () => {
                         {...fadeInUp}
                         className="space-y-8"
                     >
-                        <div className="relative group rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-black/20">
+                        <div className="relative group rounded-2xl md:rounded-[32px] overflow-hidden border border-white/10 shadow-2xl bg-black/20">
                             <motion.img
                                 layoutId="uploaded-image"
                                 src={previewUrl}
                                 alt="Preview"
-                                className="w-full h-auto max-h-[600px] object-contain mx-auto"
+                                className="w-full h-auto max-h-[300px] md:max-h-[600px] object-contain mx-auto"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-transparent to-transparent opacity-60" />
 
-                            <div className="absolute top-8 left-8 flex items-center space-x-3">
-                                <div className="flex items-center space-x-2 px-4 py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
-                                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                                    <span className="text-[10px] font-black text-emerald-400 tracking-widest uppercase">Validated</span>
+                            <div className="absolute top-4 left-4 md:top-8 md:left-8 flex items-center space-x-3">
+                                <div className="flex items-center space-x-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-black/60 backdrop-blur-md border border-white/10">
+                                    <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-emerald-400" />
+                                    <span className="text-[8px] md:text-[10px] font-black text-emerald-400 tracking-widest uppercase">Validated</span>
                                 </div>
                             </div>
 
@@ -164,35 +164,35 @@ const ImageUploader = () => {
                                 whileHover={{ scale: 1.1, rotate: 90 }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={removeImage}
-                                className="absolute top-8 right-8 bg-black/60 backdrop-blur-md border border-white/10 p-3 rounded-full text-white/50 hover:text-white hover:bg-red-500/80 transition-all duration-300 shadow-xl"
+                                className="absolute top-4 right-4 md:top-8 md:right-8 bg-black/60 backdrop-blur-md border border-white/10 p-2 md:p-3 rounded-full text-white/50 hover:text-white hover:bg-red-500/80 transition-all duration-300 shadow-xl"
                             >
-                                <X className="w-5 h-5" />
+                                <X className="w-4 h-4 md:w-5 md:h-5" />
                             </motion.button>
                         </div>
 
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-8 p-8 bg-white/[0.03] rounded-[32px] border border-white/10 backdrop-blur-3xl shadow-2xl"
+                            className="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-6 md:gap-8 p-6 md:p-8 bg-white/[0.03] rounded-2xl md:rounded-[32px] border border-white/10 backdrop-blur-3xl shadow-2xl"
                         >
-                            <div className="flex items-center space-x-6">
-                                <div className="w-16 h-16 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center p-1 overflow-hidden shrink-0 group">
-                                    <img src={previewUrl} alt="Thumb" className="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-500" />
+                            <div className="flex items-center space-x-4 md:space-x-6">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-white/5 rounded-xl md:rounded-2xl border border-white/10 flex items-center justify-center p-1 overflow-hidden shrink-0 group">
+                                    <img src={previewUrl} alt="Thumb" className="w-full h-full object-cover rounded-lg md:rounded-xl group-hover:scale-110 transition-transform duration-500" />
                                 </div>
-                                <div className="min-w-0 space-y-1.5">
-                                    <p className="text-sm font-black text-white truncate max-w-[200px] md:max-w-[350px] uppercase tracking-wide">
+                                <div className="min-w-0 space-y-1 md:space-y-1.5">
+                                    <p className="text-xs md:text-sm font-black text-white truncate max-w-[150px] sm:max-w-[250px] md:max-w-[350px] uppercase tracking-wide">
                                         {selectedImage?.name}
                                     </p>
-                                    <div className="flex items-center space-x-3">
-                                        <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-[10px] font-black text-indigo-400 uppercase tracking-widest">
+                                    <div className="flex flex-wrap items-center gap-2 md:gap-3">
+                                        <span className="px-2 py-0.5 md:px-2.5 md:py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20 text-[8px] md:text-[10px] font-black text-indigo-400 uppercase tracking-widest">
                                             {selectedImage?.type.split('/')[1]}
                                         </span>
-                                        <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+                                        <span className="text-[8px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.1em] md:tracking-[0.2em]">
                                             {(selectedImage?.size / 1024 / 1024).toFixed(2)} MB
                                         </span>
-                                        <div className="h-3 w-px bg-white/10" />
-                                        <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest flex items-center">
-                                            <Maximize2 className="w-3 h-3 mr-1" />
+                                        <div className="hidden sm:block h-3 w-px bg-white/10" />
+                                        <span className="text-[8px] md:text-[10px] font-black text-indigo-500 uppercase tracking-widest flex items-center">
+                                            <Maximize2 className="w-2.5 h-2.5 md:w-3 md:h-3 mr-1" />
                                             Original resolution
                                         </span>
                                     </div>
@@ -200,9 +200,9 @@ const ImageUploader = () => {
                             </div>
 
                             <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="glow-button px-10 py-4.5 rounded-[20px] text-[13px] font-black uppercase tracking-[0.25em] flex items-center justify-center space-x-3"
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="glow-button w-full xl:w-auto px-8 md:px-10 py-3.5 md:py-4.5 rounded-xl md:rounded-[20px] text-[11px] md:text-[13px] font-black uppercase tracking-[0.2em] md:tracking-[0.25em] flex items-center justify-center space-x-3"
                             >
                                 <span>Process Asset</span>
                                 <ChevronRight className="w-4 h-4" />

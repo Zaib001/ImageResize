@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Image, Zap, Shield, Sparkles, ChevronRight, LayoutGrid, Cpu, Globe } from 'lucide-react';
+import { Image, Zap, Shield, Sparkles, ChevronRight, LayoutGrid, Cpu, Globe, Menu, X } from 'lucide-react';
 import ImageUploader from './components/ImageUploader';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -59,17 +61,17 @@ function App() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="glass-nav px-6 py-4"
+        className="glass-nav px-4 md:px-6 py-4"
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-3 group cursor-pointer">
+          <div className="flex items-center space-x-3 group cursor-pointer z-[60]">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
-              className="w-10 h-10 bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20"
+              className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20"
             >
-              <Image className="w-6 h-6 text-white" />
+              <Image className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </motion.div>
-            <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
+            <span className="text-xl md:text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
               RESIZELY
             </span>
           </div>
@@ -83,14 +85,46 @@ function App() {
             ))}
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="glow-button px-7 py-2.5 rounded-full text-xs font-black uppercase tracking-widest"
-          >
-            Get Pro Access
-          </motion.button>
+          <div className="flex items-center space-x-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="glow-button px-5 md:px-7 py-2 md:py-2.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest"
+            >
+              <span className="hidden sm:inline">Get Pro Access</span>
+              <span className="sm:hidden">Pro</span>
+            </motion.button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-white/70 hover:text-white transition-colors z-[60]"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <motion.div
+          initial={false}
+          animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: '100%' }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          className="fixed inset-0 bg-[#0b0f19] z-50 md:hidden pt-24 px-6"
+        >
+          <div className="flex flex-col space-y-8">
+            {['Tools', 'Accuracy', 'API'].map((item) => (
+              <a
+                key={item}
+                href="#"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-4xl font-black uppercase tracking-widest text-white/40 hover:text-indigo-400 transition-all duration-300"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </motion.div>
       </motion.nav>
 
       <motion.main
@@ -111,7 +145,7 @@ function App() {
 
           <motion.h1
             variants={itemVariants}
-            className="text-6xl md:text-9xl font-black text-white tracking-tight leading-[0.85] uppercase"
+            className="text-5xl sm:text-7xl md:text-9xl font-black text-white tracking-tight leading-[0.85] uppercase"
           >
             <motion.span
               animate={{
@@ -141,7 +175,7 @@ function App() {
 
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium tracking-tight"
+            className="text-base sm:text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium tracking-tight px-4"
           >
             Industry-leading image synthesis and resizing. <br className="hidden md:block" />
             Military-grade encryption with zero-latency preview.
@@ -160,7 +194,7 @@ function App() {
         </motion.div>
 
         {/* Features Grid */}
-        <div className="mt-32 grid md:grid-cols-3 gap-16">
+        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {[
             { icon: Zap, title: "HyperScale API", desc: "Global edge CDN delivery in under 40ms." },
             { icon: Shield, title: "Private Vault", desc: "No data logging. Ever. Your assets are ephemeral." },
@@ -170,7 +204,7 @@ function App() {
               key={i}
               variants={itemVariants}
               whileHover={{ y: -5 }}
-              className="space-y-4"
+              className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/5 md:bg-transparent md:border-none"
             >
               <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-400">
                 <feature.icon className="w-6 h-6" />
@@ -189,29 +223,29 @@ function App() {
           <p className="text-center text-[9px] uppercase tracking-[0.5em] font-black text-slate-600 mb-16">
             Pioneering speed for
           </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-20 grayscale">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-24 opacity-20 grayscale">
             {['Meta', 'Stripe', 'OpenAI', 'SpaceX'].map((brand) => (
-              <span key={brand} className="text-2xl font-black tracking-tighter uppercase">{brand}</span>
+              <span key={brand} className="text-xl md:text-2xl font-black tracking-tighter uppercase whitespace-nowrap">{brand}</span>
             ))}
           </div>
         </motion.div>
       </motion.main>
 
       {/* Footer */}
-      <footer className="relative py-24 px-6 mt-20 border-t border-white/5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+      <footer className="relative py-12 md:py-24 px-6 mt-20 border-t border-white/5">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-20">
           <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center overflow-hidden">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-indigo-500 rounded-lg md:rounded-xl flex items-center justify-center overflow-hidden">
               <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-indigo-700" />
             </div>
-            <span className="text-xl font-black tracking-tighter uppercase">RESIZELY</span>
+            <span className="text-lg md:text-xl font-black tracking-tighter uppercase">RESIZELY</span>
           </div>
-          <div className="flex space-x-12 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
             {['Privacy', 'Legal', 'Infrastructure'].map(link => (
               <a key={link} href="#" className="hover:text-white transition-colors">{link}</a>
             ))}
           </div>
-          <p className="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase">
+          <p className="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase text-center md:text-left">
             © 2026 RESIZELY CORP. ALL SYSTEMS OPERATIONAL.
           </p>
         </div>
