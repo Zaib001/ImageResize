@@ -1,0 +1,113 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Settings2, Maximize, Move, Download, Layout, Palette, Zap, Sparkles } from 'lucide-react';
+
+const ResizeOptions = ({ onResize }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="space-y-12"
+        >
+            <div className="flex items-center justify-between mb-12">
+                <div className="flex items-center space-x-4">
+                    <div className="p-3 bg-[#F63049] text-white rounded-2xl shadow-lg border border-[#F63049]/20">
+                        <Settings2 className="w-6 h-6" />
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-black text-[#F63049] uppercase tracking-tighter">Parameters</h3>
+                        <p className="text-[9px] font-black text-[#8A244B]/50 uppercase tracking-[0.3em]">Neural Configuration</p>
+                    </div>
+                </div>
+                <div className="w-8 h-8 rounded-full border border-[#F63049]/10 flex items-center justify-center">
+                    <Zap className="w-4 h-4 text-[#F63049]/20" />
+                </div>
+            </div>
+
+            {/* Dimensions Section */}
+            <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-black uppercase tracking-[0.4em] text-[#8A244B]/60">Target Scale</label>
+                    <div className="px-3 py-1 bg-[#F63049]/5 border border-[#F63049]/10 rounded-lg flex items-center space-x-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#F63049] animate-pulse" />
+                        <span className="text-[9px] font-black text-[#D02752] uppercase tracking-widest">Linked</span>
+                    </div>
+                </div>
+                <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-3">
+                        <span className="text-[9px] font-black text-[#8A244B]/40 uppercase tracking-[0.5em] ml-1">Width</span>
+                        <input
+                            type="number"
+                            placeholder="1920"
+                            className="w-full bg-white border border-[#D02752]/20 rounded-2xl px-5 py-4 text-sm font-black text-[#8A244B] focus:border-[#F63049] focus:ring-4 focus:ring-[#F63049]/5 transition-all outline-none placeholder:text-[#8A244B]/20 shadow-sm"
+                        />
+                    </div>
+                    <div className="space-y-3">
+                        <span className="text-[9px] font-black text-[#8A244B]/40 uppercase tracking-[0.5em] ml-1">Height</span>
+                        <input
+                            type="number"
+                            placeholder="1080"
+                            className="w-full bg-white border border-[#D02752]/20 rounded-2xl px-5 py-4 text-sm font-black text-[#8A244B] focus:border-[#F63049] focus:ring-4 focus:ring-[#F63049]/5 transition-all outline-none placeholder:text-[#8A244B]/20 shadow-sm"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* Quality Section */}
+            <div className="space-y-6 pt-4">
+                <div className="flex justify-between items-center">
+                    <label className="text-[10px] font-black uppercase tracking-[0.4em] text-[#8A244B]/60">Synthesis Quality</label>
+                    <span className="text-[10px] font-black text-[#D02752] px-3 py-1 bg-[#F63049]/5 rounded-lg border border-[#F63049]/10">0.95</span>
+                </div>
+                <div className="relative pt-2">
+                    <input
+                        type="range"
+                        className="w-full h-[3px] bg-[#F63049]/10 rounded-lg appearance-none cursor-pointer accent-[#F63049]"
+                    />
+                    <div className="flex justify-between mt-4 text-[8px] font-black text-[#8A244B]/50 uppercase tracking-[0.5em]">
+                        <span>LATENCY</span>
+                        <span>PRECISION</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Format Selection */}
+            <div className="space-y-6 pt-4">
+                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-[#8A244B]/60 block">Output Standard</label>
+                <div className="grid grid-cols-3 gap-3">
+                    {['JPG', 'PNG', 'WEBP'].map((format) => (
+                        <button
+                            key={format}
+                            className={`py-4 rounded-2xl border text-[10px] font-black transition-all duration-500 ${format === 'WEBP'
+                                ? 'bg-[#F63049] text-white border-[#F63049] shadow-lg'
+                                : 'bg-white border-[#D02752]/20 text-[#8A244B]/60 hover:border-[#F63049] hover:text-[#F63049] shadow-sm'
+                                }`}
+                        >
+                            {format}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Download Button */}
+            <div className="pt-12">
+                <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-[#F63049] text-white py-5 rounded-2xl font-black uppercase tracking-[0.2em] flex items-center justify-center space-x-4 shadow-xl hover:shadow-2xl transition-all border border-[#F63049]/20"
+                >
+                    <Download className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    <span>Compile & Export</span>
+                </motion.button>
+                <div className="mt-8 flex items-center justify-center space-x-3 opacity-20">
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#F63049] to-transparent" />
+                    <Sparkles className="w-3 h-3 shrink-0 text-[#F63049]" />
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#F63049] to-transparent" />
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
+export default ResizeOptions;

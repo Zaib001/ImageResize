@@ -1,104 +1,120 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Image, Zap, Shield, Sparkles, ChevronRight, LayoutGrid, Cpu, Globe, Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { Image, Zap, Shield, Sparkles, ChevronRight, LayoutGrid, Cpu, Globe, Menu, X, ArrowDown } from 'lucide-react';
 import ImageUploader from './components/ImageUploader';
+import ResizeOptions from './components/ResizeOptions';
+import { useEffect } from 'react';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [imageData, setImageData] = useState(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.1,
+        delayChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
+  const handleImageUpload = (data) => {
+    setImageData(data);
+  };
+
+  const handleRemoveImage = () => {
+    setImageData(null);
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [imageData]);
+
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-200 selection:bg-indigo-500/30 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] selection:bg-[#F63049]/10 font-sans overflow-x-hidden">
+      {/* Noise Overlay */}
+      <div className="noise-overlay" />
+
       {/* Mesh Gradient Backgrounds */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{
-            translate: ['0% 0%', '10% -10%', '0% 0%'],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px]"
-        />
-        <motion.div
-          animate={{
-            translate: ['0% 0%', '-5% 10%', '0% 0%'],
+            translate: ['0% 0%', '15% -15%', '0% 0%'],
             scale: [1, 1.2, 1],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-fuchsia-500/10 blur-[120px]"
+          className="premium-blur top-[-15%] left-[-15%] w-[60%] h-[60%] bg-[#F63049] opacity-[0.03]"
         />
         <motion.div
           animate={{
-            translate: ['0% 0%', '15% 5%', '0% 0%'],
-            scale: [1, 0.9, 1],
+            translate: ['0% 0%', '-10% 20%', '0% 0%'],
+            scale: [1, 1.3, 1],
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[20%] right-[10%] w-[35%] h-[35%] rounded-full bg-violet-500/10 blur-[120px]"
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="premium-blur bottom-[0%] right-[-10%] w-[50%] h-[50%] bg-[#D02752] opacity-[0.02]"
+        />
+        <motion.div
+          animate={{
+            translate: ['0% 0%', '20% 10%', '0% 0%'],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          className="premium-blur top-[30%] right-[10%] w-[40%] h-[40%] bg-[#8A244B] opacity-[0.015]"
         />
       </div>
 
       {/* Navbar */}
       <motion.nav
-        initial={{ y: -20, opacity: 0 }}
+        initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="glass-nav px-4 md:px-6 py-4"
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className="glass-nav bg-transparent transition-colors duration-500 px-4 md:px-12 py-5"
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-3 group cursor-pointer z-[60]">
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20"
-            >
-              <Image className="w-5 h-5 md:w-6 md:h-6 text-white" />
-            </motion.div>
-            <span className="text-xl md:text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
-              RESIZELY
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="flex items-center space-x-4 cursor-pointer z-[60]"
+          >
+            <div className="w-10 h-10 bg-[#F63049]/5 rounded-2xl flex items-center justify-center border border-[#F63049]/10 shadow-sm">
+              <Image className="w-6 h-6 text-[#F63049]" />
+            </div>
+            <span className="text-2xl font-black tracking-[-0.05em] text-[#F63049]">
+              RESIZELY<span className="text-[#F63049]/20 truncate hidden sm:inline">.CORE</span>
             </span>
-          </div>
+          </motion.div>
 
-          <div className="hidden md:flex space-x-10 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500">
-            {['Tools', 'Accuracy', 'API'].map((item) => (
-              <a key={item} href="#" className="hover:text-white transition-colors duration-300 relative group">
+          <div className="hidden md:flex items-center space-x-12">
+            {['Engine', 'Privacy', 'Enterprise'].map((item) => (
+              <a key={item} href="#" className="text-[11px] font-black uppercase tracking-[0.3em] text-[#8A244B]/70 hover:text-[#F63049] transition-all duration-300 relative group">
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-[#F63049] group-hover:w-full transition-all duration-500" />
               </a>
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="glow-button px-5 md:px-7 py-2 md:py-2.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest"
+              className="px-6 py-2.5 text-[10px] font-black uppercase tracking-widest bg-[#F63049] text-white rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
-              <span className="hidden sm:inline">Get Pro Access</span>
-              <span className="sm:hidden">Pro</span>
+              Start Session
             </motion.button>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-white/70 hover:text-white transition-colors z-[60]"
+              className="md:hidden p-2 text-[#8A244B]/50 hover:text-[#F63049] transition-colors z-[60]"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -109,145 +125,188 @@ function App() {
         <motion.div
           initial={false}
           animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed inset-0 bg-[#0b0f19] z-50 md:hidden pt-24 px-6"
+          transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+          className="fixed inset-0 bg-[#F9F8F6]/95 backdrop-blur-2xl z-50 md:hidden flex flex-col justify-center px-12"
         >
-          <div className="flex flex-col space-y-8">
-            {['Tools', 'Accuracy', 'API'].map((item) => (
-              <a
+          <div className="space-y-12">
+            {['Engine', 'Privacy', 'Enterprise'].map((item, i) => (
+              <motion.a
                 key={item}
+                initial={{ opacity: 0, x: 20 }}
+                animate={isMenuOpen ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: i * 0.1 }}
                 href="#"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-4xl font-black uppercase tracking-widest text-white/40 hover:text-indigo-400 transition-all duration-300"
+                className="block text-6xl font-black uppercase tracking-tighter text-[#F63049]/10 hover:text-[#F63049] transition-all duration-500"
               >
                 {item}
-              </a>
+              </motion.a>
             ))}
           </div>
         </motion.div>
       </motion.nav>
 
-      <motion.main
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative max-w-5xl mx-auto px-6 py-20"
+      <main
+        className="relative max-w-[1400px] min-h-[80vh] mx-auto px-6 py-12 md:py-24"
       >
         {/* Hero Section */}
-        <div className="text-center mb-24 space-y-8">
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center space-x-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 shadow-xl"
-          >
-            <Sparkles className="w-4 h-4 text-indigo-400" />
-            <span className="text-[10px] font-black tracking-[0.2em] uppercase text-indigo-300">Neural Engine v4.0 Active</span>
-          </motion.div>
-
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl sm:text-7xl md:text-9xl font-black text-white tracking-tight leading-[0.85] uppercase"
-          >
-            <motion.span
-              animate={{
-                y: [0, -15, 0],
-                textShadow: [
-                  "0 0 0px rgba(99,102,241,0)",
-                  "0 0 20px rgba(99,102,241,0.3)",
-                  "0 0 0px rgba(99,102,241,0)"
-                ]
-              }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-block"
+        <AnimatePresence mode="wait">
+          {imageData === null && (
+            <motion.div
+              key="hero-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="text-center mb-32 space-y-12"
             >
-              Advanced
-            </motion.span>
-            <br />
-            <motion.span
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-              className="gradient-text bg-[length:200%_auto] inline-block"
-            >
-              Processing.
-            </motion.span>
-          </motion.h1>
+              <div className="inline-flex items-center space-x-3 px-6 py-2 rounded-full bg-[#F63049]/5 border border-[#F63049]/10 backdrop-blur-md mb-4 animate-float">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#F63049] animate-pulse" />
+                <span className="text-[10px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">Professional Mode</span>
+              </div>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium tracking-tight px-4"
-          >
-            Industry-leading image synthesis and resizing. <br className="hidden md:block" />
-            Military-grade encryption with zero-latency preview.
-          </motion.p>
-        </div>
+              <h1 className="text-[12vw] sm:text-8xl md:text-[10rem] font-black text-[#F63049] tracking-[-0.07em] leading-[0.8] uppercase flex flex-col items-center">
+                <span className="relative">
+                  Precision
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ delay: 0.4, duration: 1, ease: "circOut" }}
+                    className="absolute -bottom-4 left-0 h-4 bg-[#F63049]/10 skew-x-[-20deg]"
+                  />
+                </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752] translate-y-[-10%]">Imaging.</span>
+              </h1>
 
-        {/* Uploader Section */}
+              <div className="max-w-2xl mx-auto space-y-8">
+                <p className="text-lg md:text-xl text-[#8A244B]/80 font-medium leading-relaxed tracking-tight">
+                  High-performance image synthesis and manipulation platform. <br />
+                  Engineered with corporate-grade security for enterprise assets.
+                </p>
+
+                <div className="flex flex-col items-center space-y-4 pt-12">
+                  <div className="w-px h-16 bg-gradient-to-b from-[#D02752]/30 to-transparent" />
+                  <span className="text-[9px] font-black tracking-[0.5em] text-[#8A244B]/40 uppercase">Initialize Core</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Uploader Section - Resizable Grid */}
         <motion.div
           variants={itemVariants}
-          className="relative group perspective-1000"
+          layout
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className={`grid grid-cols-1 ${imageData ? 'lg:grid-cols-12' : 'grid-cols-1'} gap-8 md:gap-20 items-stretch h-full`}
         >
-          <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 rounded-[40px] blur-2xl opacity-10 group-hover:opacity-25 transition duration-1000" />
-          <div className="relative bg-[#0d121f]/90 backdrop-blur-3xl p-4 md:p-10 rounded-[32px] border border-white/[0.08] shadow-2xl">
-            <ImageUploader />
-          </div>
+          {/* Left Side: Uploader/Preview */}
+          <motion.div
+            layout
+            className={`relative group h-full ${imageData ? 'lg:col-span-7 xl:col-span-8' : 'w-full max-w-4xl mx-auto'}`}
+          >
+            <div className="absolute -inset-4 bg-white/5 rounded-[48px] blur-3xl opacity-0 group-hover:opacity-100 transition duration-1000 pointer-events-none" />
+            <motion.div
+              layout
+              className={`glass-card h-full ${imageData ? 'p-4 md:p-8' : 'p-4 md:p-12'} rounded-[40px]`}
+            >
+              <ImageUploader
+                onUpload={handleImageUpload}
+                onRemove={handleRemoveImage}
+                externalImage={imageData}
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Right Side: Options Panel */}
+          <AnimatePresence>
+            {imageData && (
+              <motion.div
+                initial={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: 50, filter: 'blur(10px)' }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-32 h-fit mb-24 lg:mb-0"
+              >
+                <div className="glass-card p-8 md:p-10 rounded-[40px] border border-white/5 h-full">
+                  <ResizeOptions onResize={() => { }} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         {/* Features Grid */}
-        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
-          {[
-            { icon: Zap, title: "HyperScale API", desc: "Global edge CDN delivery in under 40ms." },
-            { icon: Shield, title: "Private Vault", desc: "No data logging. Ever. Your assets are ephemeral." },
-            { icon: LayoutGrid, title: "Batch Processing", desc: "Resize thousands of assets simultaneously." }
-          ].map((feature, i) => (
+        <AnimatePresence>
+          {imageData === null && (
             <motion.div
-              key={i}
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-              className="space-y-4 p-6 rounded-2xl bg-white/5 border border-white/5 md:bg-transparent md:border-none"
+              key="features-section"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mt-48 grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24 px-4 md:px-0"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-400">
-                <feature.icon className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-black tracking-tight text-white uppercase">{feature.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed font-medium">{feature.desc}</p>
+              {[
+                { icon: Zap, title: "Neural Warp", desc: "Proprietary upscaling algorithms optimized for precision." },
+                { icon: Shield, title: "Secure Core", desc: "Enterprise-grade data isolation and ephemeral processing." },
+                { icon: LayoutGrid, title: "Parallel Engine", desc: "High-throughput batch processing for rapid deployment." }
+              ].map((feature, i) => (
+                <motion.div
+                  key={feature.title}
+                  whileHover={{ y: -10 }}
+                  className="space-y-8"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-[#F63049]/5 border border-[#F63049]/10 flex items-center justify-center text-[#F63049] shadow-sm">
+                    <feature.icon className="w-8 h-8" />
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-black tracking-tight text-[#D02752] uppercase">{feature.title}</h3>
+                    <p className="text-[#8A244B]/70 text-base leading-relaxed font-medium">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
 
-        {/* Trust Indicators */}
         <motion.div
           variants={itemVariants}
-          className="mt-40 pt-20 border-t border-white/5"
+          className={`${imageData ? 'mt-40' : 'mt-64'} pt-32 border-t border-[#D02752]/10 transition-all duration-1000`}
         >
-          <p className="text-center text-[9px] uppercase tracking-[0.5em] font-black text-slate-600 mb-16">
-            Pioneering speed for
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-24 opacity-20 grayscale">
-            {['Meta', 'Stripe', 'OpenAI', 'SpaceX'].map((brand) => (
-              <span key={brand} className="text-xl md:text-2xl font-black tracking-tighter uppercase whitespace-nowrap">{brand}</span>
-            ))}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-16">
+            <div className="text-[10px] font-black tracking-[0.8em] text-[#8A244B]/40 uppercase vertical-text hidden md:block select-none">ARCHITECTURE</div>
+            <div className="flex-1 flex flex-wrap justify-center gap-12 md:gap-32 opacity-30 grayscale hover:opacity-100 transition-opacity duration-700">
+              {['Meta', 'Stripe', 'SpaceX', 'OpenAI'].map((brand) => (
+                <span key={brand} className="text-3xl font-black tracking-tighter uppercase whitespace-nowrap italic text-[#D02752]">{brand}</span>
+              ))}
+            </div>
           </div>
         </motion.div>
-      </motion.main>
+      </main>
 
-      {/* Footer */}
-      <footer className="relative py-12 md:py-24 px-6 mt-20 border-t border-white/5">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-20">
-          <div className="flex items-center space-x-4">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-indigo-500 rounded-lg md:rounded-xl flex items-center justify-center overflow-hidden">
-              <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-indigo-700" />
-            </div>
-            <span className="text-lg md:text-xl font-black tracking-tighter uppercase">RESIZELY</span>
+      <footer className="relative py-24 px-6 md:px-12 mt-40 border-t border-[#D02752]/10 bg-transparent">
+        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
+          <div className="flex flex-col items-center md:items-start space-y-4">
+            <span className="text-2xl font-black tracking-tighter uppercase text-[#F63049]">RESIZELY</span>
+            <p className="text-[10px] font-bold tracking-[0.3em] text-[#8A244B]/40 uppercase">Version 4.3.0 Berry Edition</p>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12 text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">
-            {['Privacy', 'Legal', 'Infrastructure'].map(link => (
-              <a key={link} href="#" className="hover:text-white transition-colors">{link}</a>
+
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-[10px] font-black uppercase tracking-[0.4em] text-[#8A244B]/70">
+            {['Security', 'Documentation', 'Status'].map(link => (
+              <a key={link} href="#" className="hover:text-[#F63049] transition-colors duration-500">{link}</a>
             ))}
           </div>
-          <p className="text-[10px] font-black tracking-[0.2em] text-slate-700 uppercase text-center md:text-left">
-            © 2026 RESIZELY CORP. ALL SYSTEMS OPERATIONAL.
-          </p>
+
+          <div className="flex flex-col items-center md:items-end space-y-2">
+            <p className="text-[10px] font-black tracking-[0.2em] text-[#8A244B]/20 uppercase">
+              RESIZELY TECHNOLOGY GROUP © 2026
+            </p>
+            <div className="flex space-x-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#F63049] shadow-[0_0_10px_rgba(246,48,73,0.5)]" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#F63049]/20" />
+              <div className="w-1.5 h-1.5 rounded-full bg-[#F63049]/20" />
+            </div>
+          </div>
         </div>
       </footer>
     </div>
