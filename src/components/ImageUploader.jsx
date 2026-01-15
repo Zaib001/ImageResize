@@ -162,10 +162,11 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
 
                             <div className="absolute inset-0 bg-gradient-to-t from-[#F63049]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
-                            <div className="absolute top-6 left-6 flex items-center space-x-3">
-                                <div className="flex items-center space-x-3 px-5 py-2.5 rounded-2xl bg-white/90 backdrop-blur-xl border border-[#D02752]/20 shadow-md">
-                                    <div className="w-2 h-2 rounded-full bg-[#F63049] animate-pulse" />
-                                    <span className="text-[10px] font-black text-[#D02752] tracking-[0.2em] uppercase">Validated Secure</span>
+                            <div className="absolute top-3 sm:top-6 left-3 sm:left-6 flex items-center space-x-2 sm:space-x-3">
+                                <div className="flex items-center space-x-2 sm:space-x-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white/90 backdrop-blur-xl border border-[#D02752]/20 shadow-md">
+                                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#F63049] animate-pulse" />
+                                    <span className="text-[8px] sm:text-[10px] font-black text-[#D02752] tracking-[0.1em] sm:tracking-[0.2em] uppercase hidden xs:inline">Validated</span>
+                                    <span className="text-[8px] sm:text-[10px] font-black text-[#D02752] tracking-[0.1em] sm:tracking-[0.2em] uppercase xs:hidden">✓</span>
                                 </div>
                             </div>
 
@@ -173,36 +174,37 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={removeImage}
-                                className="absolute top-6 right-6 bg-white text-[#F63049] px-6 py-3 rounded-2xl shadow-xl border border-[#F63049]/20 flex items-center space-x-3 hover:bg-[#F63049] hover:text-white transition-all duration-300 z-10"
+                                className="absolute top-3 sm:top-6 right-3 sm:right-6 bg-white text-[#F63049] px-3 sm:px-6 py-2 sm:py-3 rounded-xl sm:rounded-2xl shadow-xl border border-[#F63049]/20 flex items-center space-x-2 sm:space-x-3 hover:bg-[#F63049] hover:text-white transition-all duration-300 z-10"
                             >
-                                <X className="w-5 h-5" />
-                                <span className="text-[10px] font-black uppercase tracking-widest">Cancel Asset</span>
+                                <X className="w-4 sm:w-5 h-4 sm:h-5" />
+                                <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider sm:tracking-widest hidden xs:inline">Cancel</span>
                             </motion.button>
                         </div>
 
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8 bg-white rounded-[32px] border border-[#D02752]/10 shadow-sm">
-                            <div className="flex items-center space-x-8 w-full md:w-auto">
-                                <div className="w-20 h-20 bg-white border border-[#D02752]/20 rounded-2xl overflow-hidden p-1 shrink-0 group">
-                                    <img src={externalImage.previewUrl} alt="Thumb" className="w-full h-full object-cover rounded-xl group-hover:scale-125 transition-transform duration-1000" />
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-8 p-4 sm:p-8 bg-white rounded-2xl sm:rounded-[32px] border border-[#D02752]/10 shadow-sm">
+                            <div className="flex items-center space-x-4 sm:space-x-8 w-full md:w-auto">
+                                <div className="w-16 sm:w-20 h-16 sm:h-20 bg-white border border-[#D02752]/20 rounded-xl sm:rounded-2xl overflow-hidden p-1 shrink-0 group">
+                                    <img src={externalImage.previewUrl} alt="Thumb" className="w-full h-full object-cover rounded-lg sm:rounded-xl group-hover:scale-125 transition-transform duration-1000" />
                                 </div>
-                                <div className="min-w-0 space-y-2">
-                                    <p className="text-lg font-black text-[#F63049] truncate uppercase tracking-tighter">
+                                <div className="min-w-0 space-y-2 flex-1">
+                                    <p className="text-sm sm:text-lg font-black text-[#F63049] truncate uppercase tracking-tighter">
                                         {externalImage.name}
                                     </p>
-                                    <div className="flex items-center gap-4">
-                                        <span className="px-3 py-1 rounded-lg bg-[#D02752]/5 border border-[#D02752]/10 text-[9px] font-black text-[#D02752] uppercase tracking-widest">
+                                    <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+                                        <span className="px-2 sm:px-3 py-1 rounded-lg bg-[#D02752]/5 border border-[#D02752]/10 text-[8px] sm:text-[9px] font-black text-[#D02752] uppercase tracking-widest">
                                             {externalImage.type.split('/')[1]}
                                         </span>
-                                        <span className="text-[9px] font-black text-[#8A244B]/60 uppercase tracking-[0.2em]">
+                                        <span className="text-[8px] sm:text-[9px] font-black text-[#8A244B]/60 uppercase tracking-[0.2em]">
                                             {(externalImage.size / 1024 / 1024).toFixed(2)} MB
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex items-center space-x-4 text-[9px] font-black text-[#8A244B]/50 uppercase tracking-[0.4em] bg-white px-6 py-4 rounded-2xl border border-[#D02752]/5 w-full md:w-auto justify-center shadow-sm">
-                                <Maximize2 className="w-4 h-4 mr-2 text-[#F63049]" />
-                                <span>Local Session Active</span>
+                            <div className="flex items-center space-x-2 sm:space-x-4 text-[8px] sm:text-[9px] font-black text-[#8A244B]/50 uppercase tracking-[0.2em] sm:tracking-[0.4em] bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-[#D02752]/5 w-full md:w-auto justify-center shadow-sm">
+                                <Maximize2 className="w-3 sm:w-4 h-3 sm:h-4 mr-1 sm:mr-2 text-[#F63049]" />
+                                <span className="hidden sm:inline">Local Session Active</span>
+                                <span className="sm:hidden">Active</span>
                             </div>
                         </div>
                     </motion.div>
