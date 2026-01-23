@@ -6,20 +6,14 @@ import ImageUploader from './components/ImageUploader';
 import ResizeOptions from './components/ResizeOptions';
 import { useEffect, useRef } from 'react';
 import { api } from './services/api';
-<<<<<<< HEAD
 import 'react-image-crop/dist/ReactCrop.css';
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [imageData, setImageData] = useState(null);
-<<<<<<< HEAD
   const [crop, setCrop] = useState(null);
   const [rotation, setRotation] = useState(0);
   const lastOptionsRef = useRef({});
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,24 +37,17 @@ function App() {
 
   const handleImageUpload = (data) => {
     setImageData(data);
-<<<<<<< HEAD
     setCrop(null);
     setRotation(0);
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const abortControllerRef = useRef(null);
-<<<<<<< HEAD
   const lastPreviewParamsRef = useRef(null);
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
 
   const handleResizeUpdate = async (options) => {
     if (!imageData?.file) return;
 
-<<<<<<< HEAD
     // Cache options for when crop/rotate changes
     if (options) {
       lastOptionsRef.current = { ...lastOptionsRef.current, ...options };
@@ -91,13 +78,10 @@ function App() {
 
     lastPreviewParamsRef.current = previewParams;
 
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
     if (abortControllerRef.current) abortControllerRef.current.abort();
     const controller = new AbortController();
     abortControllerRef.current = controller;
 
-<<<<<<< HEAD
     if (currentOptions.width && currentOptions.height) {
       try {
         const formData = new FormData();
@@ -122,40 +106,15 @@ function App() {
         const blob = await api.processImage(formData, controller.signal);
         if (!blob) return;
 
-=======
-    if (options.width && options.height) {
-      try {
-        const formData = new FormData();
-        formData.append('image', imageData.file);
-        formData.append('width', options.width);
-        formData.append('height', options.height);
-        formData.append('unit', options.unit || 'px');
-        formData.append('mode', options.mode || 'stretch');
-        formData.append('isPreview', 'true');
-
-        const previewFormat = (options.format === 'pdf') ? 'jpeg' : (options.format || 'jpeg');
-        formData.append('format', previewFormat);
-        formData.append('quality', options.quality || 90);
-        formData.append('backgroundColor', options.backgroundColor);
-
-        const blob = await api.processImage(formData, controller.signal);
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
         const newUrl = URL.createObjectURL(blob);
 
         setImageData(prev => ({
           ...prev,
-<<<<<<< HEAD
           previewUrl: newUrl,
           previewSize: blob.size // Store the size of the preview
         }));
       } catch (err) {
         if (err.name === 'CanceledError' || err.name === 'AbortError' || axios.isCancel(err) || err.code === 'ERR_CANCELED') {
-=======
-          previewUrl: newUrl
-        }));
-      } catch (err) {
-        if (err.name === 'CanceledError' || err.name === 'AbortError' || axios.isCancel(err)) {
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
           return;
         }
         console.error("Preview update failed", err);
@@ -351,7 +310,6 @@ function App() {
                 onUpload={handleImageUpload}
                 onRemove={handleRemoveImage}
                 externalImage={imageData}
-<<<<<<< HEAD
                 crop={crop}
                 setCrop={setCrop}
                 rotation={rotation}
@@ -359,12 +317,6 @@ function App() {
               />
             </motion.div>
           </motion.div>
-=======
-              />
-            </motion.div>
-          </motion.div>
-
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
           {/* Right Side: Options Panel */}
           <AnimatePresence>
             {imageData && (
@@ -380,12 +332,9 @@ function App() {
                     onResize={handleResizeUpdate}
                     imageFile={imageData?.file}
                     initialDimensions={{ width: imageData?.width || 1920, height: imageData?.height || 1080 }}
-<<<<<<< HEAD
                     previewSize={imageData?.previewSize}
                     crop={crop}
                     rotation={rotation}
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
                   />
                 </div>
               </motion.div>

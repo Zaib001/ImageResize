@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-<<<<<<< HEAD
 import { Upload, X, AlertCircle, Maximize2, Shield, Sparkles, RotateCcw, RotateCw, Crop as CropIcon } from 'lucide-react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -31,25 +30,10 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
             }
         }
     }, [externalImage?.previewUrl, setCrop, setRotation]);
-=======
-import { Upload, X, CheckCircle2, ChevronRight, FileImage, AlertCircle, Maximize2, Shield, Sparkles } from 'lucide-react';
-
-const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
-    const [isDragging, setIsDragging] = useState(false);
-    const [error, setError] = useState(null);
-    const fileInputRef = useRef(null);
-
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
-    const maxSize = 4 * 1024 * 1024; // 4MB (matching backend/Vercel limit)
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
 
     const handleFileChange = (file) => {
         if (!file) return;
 
-<<<<<<< HEAD
-=======
-        // Clear previous error first
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
         setError(null);
 
         if (!allowedTypes.includes(file.type)) {
@@ -64,7 +48,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
 
         const url = URL.createObjectURL(file);
 
-<<<<<<< HEAD
         const img = new Image();
         img.onload = () => {
             setImgDimensions({
@@ -72,11 +55,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                 naturalHeight: img.naturalHeight
             });
 
-=======
-        // Load image to get dimensions
-        const img = new Image();
-        img.onload = () => {
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
             onUpload({
                 file,
                 previewUrl: url,
@@ -86,14 +64,11 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                 width: img.naturalWidth,
                 height: img.naturalHeight
             });
-<<<<<<< HEAD
 
             console.log('Image loaded with dimensions:', {
                 width: img.naturalWidth,
                 height: img.naturalHeight
             });
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
         };
         img.onerror = () => {
             setError('FAILED TO READ IMAGE DIMENSIONS.');
@@ -130,7 +105,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
         }
     };
 
-<<<<<<< HEAD
     // Handle image load to update dimensions
     const onImageLoad = (img) => {
         if (img) {
@@ -167,8 +141,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
         setRotation(prev => (prev + 90) % 360);
     };
 
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
     return (
         <div className="w-full h-full min-h-[400px] flex flex-col justify-center">
             <AnimatePresence mode="wait">
@@ -260,7 +232,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                         className="space-y-12"
                     >
                         <div className="relative group rounded-[32px] overflow-hidden border border-[#D02752]/20 bg-white shadow-xl">
-<<<<<<< HEAD
                             <div className="flex justify-center bg-gray-50/50 p-4 min-h-[400px] items-center">
                                 <ReactCrop
                                     crop={crop}
@@ -290,16 +261,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                             </div>
 
                             <div className="absolute inset-0 bg-gradient-to-t from-[#F63049]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-=======
-                            <motion.img
-                                layoutId="uploaded-image"
-                                src={externalImage.previewUrl}
-                                alt="Preview"
-                                className="w-full h-auto max-h-[600px] object-contain mx-auto"
-                            />
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#F63049]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
 
                             <div className="absolute top-3 sm:top-6 left-3 sm:left-6 flex items-center space-x-2 sm:space-x-3">
                                 <div className="flex items-center space-x-2 sm:space-x-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white/90 backdrop-blur-xl border border-[#D02752]/20 shadow-md">
@@ -318,7 +279,6 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                                 <X className="w-4 sm:w-5 h-4 sm:h-5" />
                                 <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider sm:tracking-widest hidden xs:inline">Cancel</span>
                             </motion.button>
-<<<<<<< HEAD
 
                             {/* Crop info overlay */}
                             {crop && crop.width < 100 && (
@@ -359,23 +319,17 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                                         : 'Drag on image to crop'}
                                 </span>
                             </div>
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-8 p-4 sm:p-8 bg-white rounded-2xl sm:rounded-[32px] border border-[#D02752]/10 shadow-sm">
                             <div className="flex items-center space-x-4 sm:space-x-8 w-full md:w-auto">
                                 <div className="w-16 sm:w-20 h-16 sm:h-20 bg-white border border-[#D02752]/20 rounded-xl sm:rounded-2xl overflow-hidden p-1 shrink-0 group">
-<<<<<<< HEAD
                                     <img
                                         src={externalImage.previewUrl}
                                         alt="Thumb"
                                         style={{ transform: `rotate(${rotation}deg)` }}
                                         className="w-full h-full object-cover rounded-lg sm:rounded-xl group-hover:scale-125 transition-transform duration-1000"
                                     />
-=======
-                                    <img src={externalImage.previewUrl} alt="Thumb" className="w-full h-full object-cover rounded-lg sm:rounded-xl group-hover:scale-125 transition-transform duration-1000" />
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
                                 </div>
                                 <div className="min-w-0 space-y-2 flex-1">
                                     <p className="text-sm sm:text-lg font-black text-[#F63049] truncate uppercase tracking-tighter">
@@ -386,12 +340,9 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
                                             {externalImage.type.split('/')[1]}
                                         </span>
                                         <span className="text-[10px] sm:text-[11px] font-black text-[#8A244B]/60 uppercase tracking-[0.2em]">
-<<<<<<< HEAD
                                             {externalImage.width} × {externalImage.height} px
                                         </span>
                                         <span className="text-[10px] sm:text-[11px] font-black text-[#8A244B]/60 uppercase tracking-[0.2em]">
-=======
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
                                             {(externalImage.size / 1024 / 1024).toFixed(2)} MB
                                         </span>
                                     </div>
@@ -433,8 +384,4 @@ const ImageUploader = ({ onUpload, onRemove, externalImage }) => {
     );
 };
 
-<<<<<<< HEAD
 export default ImageUploader;
-=======
-export default ImageUploader;
->>>>>>> 278c49c0a54eae1b5e66d9f77c069b8423ae4461
