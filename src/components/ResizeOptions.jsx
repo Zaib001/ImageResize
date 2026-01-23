@@ -98,8 +98,6 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
             link.parentNode.removeChild(link);
             window.URL.revokeObjectURL(url);
 
-            alert(`✅ Download complete!\nSize: ${Math.round(blob.size / 1024)} KB`);
-
         } catch (err) {
             console.error("Download failed", err);
             alert(`❌ Download failed: ${err.message}`);
