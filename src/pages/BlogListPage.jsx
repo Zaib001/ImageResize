@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 import blogService from '../services/blogService';
 import SEOHead from '../components/SEOHead';
 import Navbar from '../components/Navbar';
+import IntelligenceNetwork from '../components/IntelligenceNetwork';
 
 const BlogListPage = () => {
     const [blogs, setBlogs] = useState([]);
@@ -190,8 +191,7 @@ const BlogListPage = () => {
                     </div>
                 )}
             </section>
-
-
+            <IntelligenceNetwork />
 
             {/* Footer */}
             <footer className="py-24 px-8 border-t border-[#F63049]/5">

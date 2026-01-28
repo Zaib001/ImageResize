@@ -16,6 +16,7 @@ import {
 import blogService from '../services/blogService';
 import SEOHead from '../components/SEOHead';
 import Navbar from '../components/Navbar';
+import IntelligenceNetwork from '../components/IntelligenceNetwork';
 
 const BlogDetailPage = () => {
     const { slug } = useParams();
