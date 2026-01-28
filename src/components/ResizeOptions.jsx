@@ -348,7 +348,7 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
                     <label>Max File Size</label>
                     {previewSize && (
                         <span className="text-[#F63049] flex items-center gap-2">
-                            <span className="opacity-50">EST:</span>
+                            <span className="opacity-50">APPROX. SIZE:</span>
                             {(previewSize / 1024).toFixed(1)} KB
                         </span>
                     )}

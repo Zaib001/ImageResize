@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, X, AlertCircle, Maximize2, Shield, Sparkles, RotateCcw, RotateCw, Crop as CropIcon } from 'lucide-react';
+import { Upload, X, Check, AlertCircle, Maximize2, Shield, Sparkles, RotateCcw, RotateCw, Crop as CropIcon } from 'lucide-react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotation, setRotation }) => {
     const [isDragging, setIsDragging] = useState(false);
+    const [isCropping, setIsCropping] = useState(false);
+    const [tempCrop, setTempCrop] = useState(null);
     const [error, setError] = useState(null);
     const fileInputRef = useRef(null);
     const [imgDimensions, setImgDimensions] = useState({ naturalWidth: 0, naturalHeight: 0 });
@@ -78,7 +80,12 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
     };
 
     const onFileSelect = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files?.[0];
+        if (!file) {
+            // User cancelled file selection on mobile/desktop
+            setIsDragging(false);
+            return;
+        }
         handleFileChange(file);
     };
 
@@ -117,19 +124,37 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
         }
     };
 
+    // Start cropping mode
+    const startCropping = () => {
+        setTempCrop(crop || { unit: '%', width: 50, height: 50, x: 25, y: 25 });
+        setIsCropping(true);
+    };
+
+    // Confirm the crop
+    const confirmCrop = () => {
+        setCrop(tempCrop);
+        setIsCropping(false);
+        setTempCrop(null);
+    };
+
+    // Cancel cropping
+    const cancelCrop = () => {
+        setIsCropping(false);
+        setTempCrop(null);
+    };
+
     // Handle crop change
     const handleCropChange = (_, percentCrop) => {
-        // console.log('Crop changed:', percentCrop);
-        // Ensure unit is %
+        if (!isCropping) return;
         if (!percentCrop.unit) percentCrop.unit = '%';
-        setCrop(percentCrop);
+        setTempCrop(percentCrop);
     };
 
     // Handle crop completion
     const handleCropComplete = (_, percentCrop) => {
-        // console.log('Crop completed:', percentCrop);
+        if (!isCropping) return;
         if (!percentCrop.unit) percentCrop.unit = '%';
-        setCrop(percentCrop);
+        setTempCrop(percentCrop);
     };
 
     // Rotate handlers
@@ -232,14 +257,15 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                         className="space-y-12"
                     >
                         <div className="relative group rounded-[32px] overflow-hidden border border-[#D02752]/20 bg-white shadow-xl">
-                            <div className="flex justify-center bg-gray-50/50 p-4 min-h-[400px] items-center">
+                            <div className={`flex justify-center bg-gray-50/50 p-4 min-h-[400px] items-center ${isCropping ? 'cursor-crosshair' : 'cursor-default'}`}>
                                 <ReactCrop
-                                    crop={crop}
+                                    crop={isCropping ? tempCrop : crop}
                                     onChange={handleCropChange}
                                     onComplete={handleCropComplete}
-                                    ruleOfThirds
+                                    ruleOfThirds={isCropping}
                                     minWidth={50}
                                     minHeight={50}
+                                    disabled={!isCropping}
                                     keepSelection={true}
                                     style={{ maxHeight: '600px', maxWidth: '100%' }}
                                 >
@@ -290,35 +316,62 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                         </div>
 
                         {/* Toolbar: Rotate & Crop Controls */}
-                        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-b border-[#D02752]/10">
-                            <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-[#D02752]/10 shadow-sm">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-[#8A244B]/40 mr-2">Rotate</span>
-                                <button
-                                    onClick={rotateLeft}
-                                    className="p-2 hover:bg-[#F63049]/10 rounded-lg text-[#8A244B] transition-colors"
-                                    title="Rotate Left"
-                                >
-                                    <RotateCcw className="w-4 h-4" />
-                                </button>
-                                <button
-                                    onClick={rotateRight}
-                                    className="p-2 hover:bg-[#F63049]/10 rounded-lg text-[#8A244B] transition-colors"
-                                    title="Rotate Right"
-                                >
-                                    <RotateCw className="w-4 h-4" />
-                                </button>
-                                <span className="text-[10px] text-[#8A244B]/60 ml-2">
-                                    {((rotation % 360) + 360) % 360}°
-                                </span>
-                            </div>
-                            <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-[#D02752]/10 shadow-sm">
-                                <CropIcon className="w-4 h-4 text-[#8A244B]/60" />
-                                <span className="text-[10px] font-black text-[#8A244B]/60">
-                                    {crop && crop.width < 100
-                                        ? `Crop active: ${Math.round(crop.width)}% x ${Math.round(crop.height)}%`
-                                        : 'Drag on image to crop'}
-                                </span>
-                            </div>
+                        <div className="flex flex-wrap items-center justify-center gap-4 py-4 border-b border-[#D02752]/10 bg-[#F63049]/5">
+                            {!isCropping ? (
+                                <>
+                                    <div className="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-[#D02752]/10 shadow-sm">
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-[#8A244B]/40 mr-2">Rotate</span>
+                                        <button
+                                            onClick={rotateLeft}
+                                            className="p-2 hover:bg-[#F63049]/10 rounded-lg text-[#8A244B] transition-colors"
+                                            title="Rotate Left"
+                                        >
+                                            <RotateCcw className="w-4 h-4" />
+                                        </button>
+                                        <button
+                                            onClick={rotateRight}
+                                            className="p-2 hover:bg-[#F63049]/10 rounded-lg text-[#8A244B] transition-colors"
+                                            title="Rotate Right"
+                                        >
+                                            <RotateCw className="w-4 h-4" />
+                                        </button>
+                                    </div>
+                                    <button
+                                        onClick={startCropping}
+                                        className="flex items-center space-x-2 bg-white px-6 py-2 rounded-xl border border-[#D02752]/10 shadow-sm hover:border-[#F63049] hover:text-[#F63049] transition-all"
+                                    >
+                                        <CropIcon className="w-4 h-4" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Edit Crop</span>
+                                    </button>
+                                    {crop && crop.width < 100 && (
+                                        <button
+                                            onClick={() => setCrop(null)}
+                                            className="text-[9px] font-black uppercase tracking-widest text-[#F63049]/60 hover:text-[#F63049] underline"
+                                        >
+                                            Reset Crop
+                                        </button>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="flex items-center space-x-4">
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-[#F63049]">Adjust Area</span>
+                                    <div className="h-4 w-px bg-[#F63049]/20" />
+                                    <button
+                                        onClick={confirmCrop}
+                                        className="flex items-center space-x-2 bg-[#F63049] text-white px-6 py-2 rounded-xl shadow-lg hover:bg-[#D02752] transition-colors group"
+                                    >
+                                        <Check className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Apply</span>
+                                    </button>
+                                    <button
+                                        onClick={cancelCrop}
+                                        className="flex items-center space-x-2 bg-white text-[#8A244B] px-6 py-2 rounded-xl border border-[#D02752]/10 shadow-sm hover:bg-gray-50 transition-colors"
+                                    >
+                                        <X className="w-4 h-4" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest">Cancel</span>
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-8 p-4 sm:p-8 bg-white rounded-2xl sm:rounded-[32px] border border-[#D02752]/10 shadow-sm">
