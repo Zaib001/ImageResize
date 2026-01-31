@@ -232,10 +232,24 @@ const BlogDetailPage = () => {
                 <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-16">
                     {/* Main Content */}
                     <div className="lg:col-span-8">
-                        <div
-                            className="blog-content prose prose-berry max-w-none text-[#8A244B]/80 leading-[1.8] font-medium text-lg"
-                            dangerouslySetInnerHTML={{ __html: blog.content }}
-                        />
+                        <div className="w-full overflow-x-hidden">
+                            <div
+                                className="blog-content prose prose-lg prose-rose max-w-none mx-auto
+                                prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-[#F63049]
+                                prose-p:text-[#8A244B]/80 prose-p:font-medium prose-p:leading-relaxed
+                                prose-strong:text-[#F63049] prose-strong:font-bold
+                                prose-a:text-[#F63049] prose-a:font-bold prose-a:no-underline hover:prose-a:text-[#D02752]
+                                prose-blockquote:border-l-4 prose-blockquote:border-[#F63049] prose-blockquote:text-[#D02752] prose-blockquote:italic
+                                prose-img:rounded-[32px] prose-img:shadow-2xl prose-img:shadow-[#F63049]/5
+                                "
+                                style={{
+                                    wordWrap: 'break-word',
+                                    overflowWrap: 'break-word',
+                                    hyphens: 'auto'
+                                }}
+                                dangerouslySetInnerHTML={{ __html: blog.content }}
+                            />
+                        </div>
 
                         {/* Tags */}
                         <div className="mt-20 pt-10 border-t border-[#F63049]/5 flex flex-wrap gap-3">

@@ -16,7 +16,7 @@ export const api = {
             return response.data;
         } catch (error) {
             if (axios.isCancel(error) || error.name === 'CanceledError' || error.name === 'AbortError') {
-                throw error; // Re-throw so caller can handle cancellation, but don't log it here
+                throw error;
             }
             if (error.response?.data instanceof Blob) {
                 const text = await error.response.data.text();

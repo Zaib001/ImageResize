@@ -53,6 +53,18 @@ const blogService = {
     adminGetStats: async () => {
         const response = await axios.get(`${API_URL}/blogs/admin/stats`);
         return response.data;
+    },
+    uploadImage: async (file) => {
+        const formData = new FormData();
+        formData.append('image', file);
+        const token = localStorage.getItem('adminToken');
+        const response = await axios.post(`${API_URL}/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
     }
 };
 

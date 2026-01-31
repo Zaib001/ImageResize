@@ -24,7 +24,6 @@ const SEOHead = ({
             <meta name="keywords" content={keywords} />
             <link rel="canonical" href={fullUrl} />
 
-            {/* Open Graph */}
             <meta property="og:site_name" content={siteName} />
             <meta property="og:url" content={fullUrl} />
             <meta property="og:title" content={fullTitle} />
@@ -32,13 +31,11 @@ const SEOHead = ({
             <meta property="og:image" content={finalImage} />
             <meta property="og:type" content={article ? 'article' : 'website'} />
 
-            {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={finalDescription} />
             <meta name="twitter:image" content={finalImage} />
 
-            {/* JSON-LD Structured Data */}
             <script type="application/ld+json">
                 {JSON.stringify({
                     "@context": "https://schema.org",
