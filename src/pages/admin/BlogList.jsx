@@ -12,7 +12,7 @@ import {
     Clock,
     ChevronLeft,
     ChevronRight,
-    AlertCircle
+    AlertCircle, FileText
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import blogService from '../../services/blogService';

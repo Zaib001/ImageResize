@@ -122,84 +122,9 @@
   }
 }
 
-/* Blog Content Styling (Prose Berry) */
+/* Blog Content Styling handled by @tailwindcss/typography (prose) */
 .blog-content {
-  color: #8A244B;
   font-family: var(--font-sans);
-}
-
-.blog-content h1,
-.blog-content h2,
-.blog-content h3 {
-  color: #F63049 !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.04em !important;
-  text-transform: uppercase !important;
-  margin-top: 2.5em !important;
-  margin-bottom: 1em !important;
-}
-
-.blog-content h1 {
-  font-size: 2.5rem !important;
-}
-
-.blog-content h2 {
-  font-size: 1.8rem !important;
-}
-
-.blog-content h3 {
-  font-size: 1.4rem !important;
-}
-
-.blog-content p {
-  margin-bottom: 1.5em !important;
-  line-height: 1.8 !important;
-  opacity: 0.8;
-}
-
-.blog-content strong {
-  color: #F63049 !important;
-  font-weight: 700 !important;
-}
-
-.blog-content ul,
-.blog-content ol {
-  margin-bottom: 2em !important;
-  padding-left: 1.5em !important;
-  list-style-type: disc !important;
-}
-
-.blog-content li {
-  margin-bottom: 0.8em !important;
-}
-
-.blog-content blockquote {
-  border-left: 4px solid #F63049 !important;
-  padding-left: 2em !important;
-  font-style: italic !important;
-  margin: 3em 0 !important;
-  color: #D02752 !important;
-}
-
-.blog-content img {
-  border-radius: 32px !important;
-  margin: 3em 0 !important;
-  border: 1px solid rgba(246, 48, 73, 0.1) !important;
-  box-shadow: 0 20px 40px rgba(246, 48, 73, 0.05) !important;
-}
-
-.blog-content a {
-  color: #F63049 !important;
-  text-decoration: underline !important;
-  text-decoration-thickness: 2px !important;
-  text-underline-offset: 4px !important;
-  font-weight: 600 !important;
-  transition: all 0.3s !important;
-}
-
-.blog-content a:hover {
-  color: #D02752 !important;
-  text-decoration-thickness: 4px !important;
 }
 
 /* React-Quill Overrides */

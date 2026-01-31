@@ -262,19 +262,8 @@ function Home() {
                 )}
             </main>
 
-            <IntelligenceNetwork />
 
-            <footer className="relative py-24 px-6 md:px-12 mt-40 border-t border-[#D02752]/10">
-                <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-16">
-                    <div className="flex flex-col items-center md:items-start space-y-4">
-                        <span className="text-2xl font-black tracking-tighter uppercase text-[#F63049]">RESIZELY</span>
-                        <p className="text-[11px] font-bold tracking-[0.3em] text-[#8A244B]/40 uppercase">Version 4.3.0 Berry Edition</p>
-                    </div>
-                    <p className="text-[11px] font-black tracking-[0.2em] text-[#8A244B]/20 uppercase">
-                        RESIZELY TECHNOLOGY GROUP © 2026
-                    </p>
-                </div>
-            </footer>
+            <IntelligenceNetwork />
         </div>
     );
 }

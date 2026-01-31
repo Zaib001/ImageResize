@@ -346,12 +346,7 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
             <div className="space-y-4 sm:space-y-6 pt-3 sm:pt-4">
                 <div className="flex justify-between items-center text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] text-[#8A244B]/60">
                     <label>Max File Size</label>
-                    {previewSize && (
-                        <span className="text-[#F63049] flex items-center gap-2">
-                            <span className="opacity-50">APPROX. SIZE:</span>
-                            {(previewSize / 1024).toFixed(1)} KB
-                        </span>
-                    )}
+
                 </div>
                 <div className="grid grid-cols-3 gap-2 sm:gap-3">
                     {[

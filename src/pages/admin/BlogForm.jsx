@@ -102,15 +102,18 @@ const BlogForm = () => {
 
             if (response.success) {
                 navigate('/admin/blogs');
+            } else {
+                alert('Failed to save blog: ' + (response.message || 'Unknown error'));
             }
         } catch (error) {
             console.error('Save failed:', error);
+            alert('An error occurred while saving. Please check the console.');
         } finally {
             setIsSaving(false);
         }
     };
 
-    const quillModules = {
+    const quillModules = React.useMemo(() => ({
         toolbar: [
             [{ header: [1, 2, 3, false] }],
             ['bold', 'italic', 'underline', 'strike'],
@@ -118,7 +121,7 @@ const BlogForm = () => {
             ['link', 'image', 'code-block'],
             ['clean']
         ]
-    };
+    }), []);
 
     if (isLoading) {
         return <div className="min-h-[60vh] flex items-center justify-center"><Loader2 className="w-10 h-10 animate-spin text-[#F63049]" /></div>;
@@ -312,16 +315,55 @@ const BlogForm = () => {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black uppercase tracking-widest text-[#8A244B]/40 ml-2 flex items-center">
-                                    <ImageIcon className="w-3.5 h-3.5 mr-2" /> Visual Identity (URL)
+                                    <ImageIcon className="w-3.5 h-3.5 mr-2" /> Visual Identity
                                 </label>
+
+                                {/* URL Input */}
                                 <input
                                     type="text"
                                     name="featuredImage"
                                     value={formData.featuredImage}
                                     onChange={handleInputChange}
                                     placeholder="https://cloud.storage/asset.jpg"
-                                    className="w-full px-6 py-4 bg-white border-none rounded-2xl outline-none text-xs font-medium shadow-sm"
+                                    className="w-full px-6 py-4 bg-white border-none rounded-2xl outline-none text-xs font-medium shadow-sm mb-2"
                                 />
+
+                                {/* File Upload */}
+                                <div className="relative group">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={async (e) => {
+                                            const file = e.target.files[0];
+                                            if (file) {
+                                                setIsSaving(true);
+                                                try {
+                                                    const res = await blogService.uploadImage(file);
+                                                    if (res.success) {
+                                                        setFormData(prev => ({ ...prev, featuredImage: res.data.url }));
+                                                    }
+                                                } catch (err) {
+                                                    console.error('Upload failed:', err);
+                                                    alert('Image upload failed');
+                                                } finally {
+                                                    setIsSaving(false);
+                                                }
+                                            }
+                                        }}
+                                        className="hidden"
+                                        id="blog-image-upload"
+                                    />
+                                    <label
+                                        htmlFor="blog-image-upload"
+                                        className="w-full px-6 py-4 bg-white border border-dashed border-[#F63049]/20 rounded-2xl flex items-center justify-center cursor-pointer hover:bg-[#F63049]/5 transition-colors"
+                                    >
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-[#F63049]">
+                                            {isSaving ? 'Uploading...' : '+ Upload from Device'}
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <span className="text-[9px] font-bold text-[#8A244B]/30 ml-2">Use URL or Upload Image</span>
                                 {formData.featuredImage && (
                                     <div className="mt-4 rounded-xl overflow-hidden border-2 border-white shadow-md">
                                         <img src={formData.featuredImage} alt="Preview" className="w-full h-32 object-cover" />
@@ -342,7 +384,7 @@ const BlogForm = () => {
                                     className="w-full px-6 py-4 bg-white border-none rounded-2xl outline-none text-xs font-medium shadow-sm"
                                 />
                                 <div className="flex flex-wrap gap-2">
-                                    {formData.tags.map(tag => (
+                                    {(formData.tags || []).map(tag => (
                                         <div key={tag} className="flex items-center bg-[#8A244B] text-white px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest">
                                             {tag}
                                             <button type="button" onClick={() => removeTag(tag)} className="ml-2 hover:text-black">

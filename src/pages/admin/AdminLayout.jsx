@@ -13,7 +13,8 @@ import {
     ChevronRight,
     Bell,
     ExternalLink,
-    Users
+    Users,
+    Mail
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -27,6 +28,7 @@ const AdminLayout = () => {
         { path: '/admin/network', icon: Users, label: 'Collective' },
         { path: '/admin/blogs', icon: FileText, label: 'All Blogs' },
         { path: '/admin/blogs/new', icon: PlusCircle, label: 'Create Post' },
+        { path: '/admin/messages', icon: Mail, label: 'Messages' },
         { path: '/admin/settings', icon: Settings, label: 'Settings' },
     ];
 

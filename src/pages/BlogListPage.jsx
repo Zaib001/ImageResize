@@ -7,7 +7,7 @@ import {
     Calendar,
     Tag,
     ChevronRight,
-    Loader2
+    Loader2, FileText
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import blogService from '../services/blogService';
