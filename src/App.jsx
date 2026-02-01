@@ -25,7 +25,7 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
 // Initialize GA4
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || "G-PLACEHOLDER";
+const GA_MEASUREMENT_ID = "G-JL6E28N36L";
 ReactGA.initialize(GA_MEASUREMENT_ID);
 
 // Protected Route Component
@@ -89,7 +89,7 @@ const AppContent = () => {
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      {!isAdmin && <Footer />}
+      {/* {!isAdmin && <Footer />} */}
     </>
   );
 };
