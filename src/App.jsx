@@ -89,7 +89,7 @@ const AppContent = () => {
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      {/* {!isAdmin && <Footer />} */}
+      {!isAdmin && <Footer />}
     </>
   );
 };

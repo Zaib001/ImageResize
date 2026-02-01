@@ -22,7 +22,8 @@ const Navbar = ({ extraActions }) => {
 
     const navLinks = [
         { name: 'Engine', path: '/' },
-        { name: 'Blog', path: '/blog' }
+        { name: 'Blog', path: '/blog' },
+        { name: 'About', path: '/about' }
     ];
 
     return (
