@@ -151,3 +151,144 @@
   font-style: normal !important;
   font-weight: 500 !important;
 }
+
+/* Quill Output Classes (Frontend Rendering) */
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+.ql-indent-1 {
+  padding-left: 2em;
+}
+
+.ql-indent-2 {
+  padding-left: 4em;
+}
+
+.ql-indent-3 {
+  padding-left: 6em;
+}
+
+.ql-indent-4 {
+  padding-left: 8em;
+}
+
+.ql-indent-5 {
+  padding-left: 10em;
+}
+
+.ql-indent-6 {
+  padding-left: 12em;
+}
+
+.ql-indent-7 {
+  padding-left: 14em;
+}
+
+.ql-indent-8 {
+  padding-left: 16em;
+}
+
+/* Quill Font Sizes */
+.ql-size-small {
+  font-size: 0.75em !important;
+}
+
+.ql-size-large {
+  font-size: 1.5em !important;
+}
+
+.ql-size-huge {
+  font-size: 2.5em !important;
+}
+
+/* Quill Font Families */
+.ql-font-serif {
+  font-family: Georgia, Times New Roman, serif !important;
+}
+
+.ql-font-monospace {
+  font-family: Monaco, Courier New, monospace !important;
+}
+
+.ql-video {
+  display: block;
+  max-width: 100%;
+  margin: 1.5em auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Specific Tag Overrides (ensure prose respects these) */
+.blog-content u {
+  text-decoration: underline !important;
+}
+
+.blog-content strike,
+.blog-content s {
+  text-decoration: line-through !important;
+}
+
+.blog-content p {
+  margin-bottom: 1.5em;
+  white-space: pre-wrap;
+}
+
+/* Strong typography hierarchy */
+.blog-content h1 {
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase;
+  color: #F63049;
+}
+
+.blog-content h2 {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  margin-top: 1.75rem !important;
+  margin-bottom: 1rem !important;
+  text-transform: uppercase;
+  color: #F63049;
+}
+
+.blog-content h3 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  text-transform: uppercase;
+  color: #F63049;
+}
+
+.blog-content ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.5em !important;
+}
+
+.blog-content ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.5em !important;
+}
+
+.blog-content li {
+  margin-bottom: 0.5em !important;
+}
+
+.blog-content blockquote {
+  border-left: 4px solid #F63049 !important;
+  padding-left: 1.5rem !important;
+  font-style: italic !important;
+  margin: 1.5em 0 !important;
+  color: #D02752 !important;
+}

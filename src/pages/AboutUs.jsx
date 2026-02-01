@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import Navbar from '../components/Navbar';
 import { Zap, Shield, LayoutGrid } from 'lucide-react';
@@ -60,9 +61,9 @@ const AboutUs = () => {
                         <p className="text-[#8A244B]/80 mb-6">
                             Have questions, suggestions, or enterprise needs? We'd love to hear from you.
                         </p>
-                        <a href="mailto:contact@resizely.com" className="inline-block px-8 py-3 rounded-full bg-[#F63049] text-white font-bold tracking-widest uppercase hover:bg-[#D02752] transition-colors">
+                        <Link to="/contact" className="inline-block px-8 py-3 rounded-full bg-[#F63049] text-white font-bold tracking-widest uppercase hover:bg-[#D02752] transition-colors">
                             Get in Touch
-                        </a>
+                        </Link>
                     </div>
                 </motion.div>
             </main>
