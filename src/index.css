@@ -284,6 +284,11 @@
 
 .blog-content li {
   margin-bottom: 0.5em !important;
+  color: #8A244B !important;
+}
+
+.blog-content li::marker {
+  color: #F63049 !important;
 }
 
 .blog-content blockquote {
