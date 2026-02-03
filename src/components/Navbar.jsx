@@ -41,7 +41,7 @@ const Navbar = ({ extraActions }) => {
                                 <Image className={`w-6 h-6 transition-colors duration-500 ${isScrolled ? 'text-white' : 'text-[#F63049]'}`} />
                             </div>
                             <span className="text-2xl font-black tracking-[-0.05em] text-[#F63049]">
-                                RESIZELY<span className="text-[#F63049]/20 truncate hidden sm:inline">.CORE</span>
+                                XResizer
                             </span>
                         </Link>
                     </div>

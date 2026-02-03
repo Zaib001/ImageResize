@@ -9,11 +9,11 @@ const SEOHead = ({
     article = false,
     keywords = 'image resize, photo editor, online image tool, blog'
 }) => {
-    const siteName = 'Resizely.Core';
+    const siteName = 'XResizer';
     const siteUrl = 'https://xresizer.com';
     const fullUrl = `${siteUrl}${slug ? (slug.startsWith('/') ? slug : `/${slug}`) : ''}`;
-    const fullTitle = title ? `${title} | ${siteName}` : `${siteName} - Professional Imaging Engine`;
-    const defaultDescription = 'Professional high-performance image synthesis and manipulation platform for enterprise assets.';
+    const fullTitle = title ? `${title} | ${siteName}` : `${siteName} - Free Online Image Resizer`;
+    const defaultDescription = 'Free online image resizer. Resize and optimize your images in seconds. Fast, easy, and 100% private.';
     const finalDescription = description || defaultDescription;
     const finalImage = image || `${siteUrl}/og-image.jpg`;
 

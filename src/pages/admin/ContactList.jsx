@@ -10,6 +10,7 @@ const ContactList = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const [expandedMessages, setExpandedMessages] = useState(new Set());
 
     useEffect(() => {
         fetchContacts();
@@ -46,6 +47,42 @@ const ContactList = () => {
         } catch (error) {
             console.error('Failed to update status:', error);
         }
+    };
+
+    const toggleMessage = (id) => {
+        setExpandedMessages(prev => {
+            const next = new Set(prev);
+            if (next.has(id)) {
+                next.delete(id);
+            } else {
+                next.add(id);
+            }
+            return next;
+        });
+    };
+
+    const renderMessageContent = (contact) => {
+        const isExpanded = expandedMessages.has(contact._id);
+        const words = contact.message.split(' ');
+        const isLong = words.length > 50;
+
+        if (!isLong) {
+            return <p className="text-xs text-[#8A244B]/50 line-clamp-2">{contact.message}</p>;
+        }
+
+        return (
+            <div className="text-xs">
+                <p className={`text-[#8A244B]/50 ${isExpanded ? '' : 'line-clamp-2'}`}>
+                    {isExpanded ? contact.message : words.slice(0, 50).join(' ') + '...'}
+                </p>
+                <button
+                    onClick={() => toggleMessage(contact._id)}
+                    className="text-[#D02752] font-bold mt-1 hover:underline focus:outline-none"
+                >
+                    {isExpanded ? 'Read Less' : 'Read More'}
+                </button>
+            </div>
+        );
     };
 
     return (
@@ -98,9 +135,9 @@ const ContactList = () => {
                                                 <span className="text-xs text-[#8A244B]/50 font-normal">{contact.email}</span>
                                             </div>
                                         </td>
-                                        <td className="py-4 max-w-xs truncate text-[#8A244B]/80">
-                                            <p className="font-medium text-sm">{contact.subject}</p>
-                                            <p className="text-xs text-[#8A244B]/50 truncate">{contact.message}</p>
+                                        <td className="py-4 max-w-xs text-[#8A244B]/80">
+                                            <p className="font-medium text-sm mb-1">{contact.subject}</p>
+                                            {renderMessageContent(contact)}
                                         </td>
                                         <td className="py-4 text-sm text-[#8A244B]/60">
                                             {new Date(contact.createdAt).toLocaleDateString()}

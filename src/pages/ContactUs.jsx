@@ -45,7 +45,7 @@ const ContactUs = () => {
             <Navbar />
             <SEOHead
                 title="Contact Us"
-                description="Get in touch with the Resizely team for support, inquiries, or feedback."
+                description="Get in touch with the XResizer team for support, inquiries, or feedback."
                 slug="contact"
             />
 
@@ -63,7 +63,7 @@ const ContactUs = () => {
                             Get in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752]">Touch</span>
                         </h1>
                         <p className="max-w-2xl mx-auto text-xl text-[#8A244B]/80 font-medium leading-relaxed">
-                            We're here to help. Send us a message and we'll respond as soon as possible.
+                            For privacy, data handling, or legal concerns, please contact us at this email. We typically respond within 24–48 hours.
                         </p>
                     </div>
 
@@ -73,28 +73,15 @@ const ContactUs = () => {
                             <div className="p-8 rounded-[30px] bg-[#F63049]/5 border border-[#F63049]/10 space-y-6">
                                 <h3 className="text-2xl font-black text-[#D02752] uppercase mb-6">Contact Info</h3>
 
-                                <div className="flex items-start space-x-4">
+                                <div className="flex items-start space-x-4 pb-4">
                                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#F63049] shrink-0">
                                         <Mail size={18} />
                                     </div>
                                     <div>
                                         <p className="font-bold text-[#D02752] uppercase text-xs tracking-widest mb-1">Email</p>
-                                        <a href="mailto:support@resizely.com" className="text-lg font-medium text-[#8A244B] hover:text-[#F63049] transition-colors">
-                                            support@resizely.com
+                                        <a href="mailto:support@xresizer.com" className="text-lg font-medium text-[#8A244B] hover:text-[#F63049] transition-colors">
+                                            support@xresizer.com
                                         </a>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start space-x-4">
-                                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#F63049] shrink-0">
-                                        <MapPin size={18} />
-                                    </div>
-                                    <div>
-                                        <p className="font-bold text-[#D02752] uppercase text-xs tracking-widest mb-1">HQ</p>
-                                        <p className="text-lg font-medium text-[#8A244B]">
-                                            San Francisco, CA<br />
-                                            United States
-                                        </p>
                                     </div>
                                 </div>
                             </div>

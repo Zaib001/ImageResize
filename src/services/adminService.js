@@ -25,6 +25,14 @@ const adminService = {
             headers: { Authorization: `Bearer ${token}` }
         });
         return response.data;
+    },
+
+    changePassword: async (passwords) => {
+        const token = localStorage.getItem('adminToken');
+        const response = await axios.put(`${API_URL}/admin/change-password`, passwords, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        return response.data;
     }
 };
 

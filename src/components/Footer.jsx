@@ -10,7 +10,7 @@ const Footer = () => {
 
                 {/* Left: Copyright */}
                 <p className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] text-[#8A244B]/40 uppercase text-center md:text-left">
-                    © {currentYear} Resizely.Core
+                    © {currentYear} XResizer
                 </p>
 
                 {/* Right: Privacy | Terms */}

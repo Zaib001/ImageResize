@@ -11,7 +11,7 @@ const AboutUs = () => {
             <Navbar />
             <SEOHead
                 title="About Us"
-                description="Learn about the team and technology behind Resizely."
+                description="Learn about the team and technology behind XResizer."
                 slug="about"
             />
 
@@ -27,18 +27,18 @@ const AboutUs = () => {
                             <span className="text-[11px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">Our Mission</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black text-[#F63049] uppercase tracking-tighter">
-                            Redefining <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752]">Precision</span>
+                            Fast <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752]">& Simple</span>
                         </h1>
                         <p className="max-w-2xl mx-auto text-xl text-[#8A244B]/80 font-medium leading-relaxed">
-                            Resizely is built for creators, developers, and enterprises who demand pixel-perfect image manipulation without compromising on security or speed.
+                            XResizer is a simple, fast, and free tool for resizing and optimizing your images instantly in your browser.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
                         {[
-                            { icon: Zap, title: "Speed First", desc: "Our engine processes images in milliseconds using WASM technology directly in your browser." },
-                            { icon: Shield, title: "Privacy Focused", desc: "Your images never leave your device for basic processing. We prioritize local-first manipulation." },
-                            { icon: LayoutGrid, title: "Professional Tools", desc: "Access enterprise-grade compression, format conversion, and resizing algorithms." }
+                            { icon: Zap, title: "Speed First", desc: "Our engine processes images in milliseconds directly in your browser." },
+                            { icon: Shield, title: "Privacy Focused", desc: "Your images never leave your device. We prioritize secure, local-first processing." },
+                            { icon: LayoutGrid, title: "Best Quality", desc: "Get high-quality results with optimized compression and resizing tools." }
                         ].map((item, i) => (
                             <motion.div
                                 key={i}
@@ -59,7 +59,7 @@ const AboutUs = () => {
                     <div className="mt-20 p-8 rounded-[30px] bg-[#F63049]/5 border border-[#F63049]/10 text-center">
                         <h3 className="text-2xl font-black text-[#D02752] uppercase mb-4">Contact Us</h3>
                         <p className="text-[#8A244B]/80 mb-6">
-                            Have questions, suggestions, or enterprise needs? We'd love to hear from you.
+                            Have questions, suggestions, or just want to say hi? We'd love to hear from you.
                         </p>
                         <Link to="/contact" className="inline-block px-8 py-3 rounded-full bg-[#F63049] text-white font-bold tracking-widest uppercase hover:bg-[#D02752] transition-colors">
                             Get in Touch

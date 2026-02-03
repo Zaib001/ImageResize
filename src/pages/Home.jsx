@@ -1,21 +1,37 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Zap, Shield, LayoutGrid, Menu, X } from 'lucide-react';
+import { Sparkles, Zap, Shield, LayoutGrid, Globe, MousePointer2, Star, Target, ShieldCheck, Gift } from 'lucide-react';
 import ImageUploader from '../components/ImageUploader';
 import ResizeOptions from '../components/ResizeOptions';
-import IntelligenceNetwork from '../components/IntelligenceNetwork';
 import Navbar from '../components/Navbar';
+import SEOHead from '../components/SEOHead';
 import { api } from '../services/api';
 import 'react-image-crop/dist/ReactCrop.css';
-import { Link } from 'react-router-dom';
 
 function Home() {
     const [imageData, setImageData] = useState(null);
     const [crop, setCrop] = useState(null);
     const [rotation, setRotation] = useState(0);
     const [isProcessingPreview, setIsProcessingPreview] = useState(false);
+    const { targetSlug } = useParams();
     const lastOptionsRef = useRef({});
+
+    // SEO Data Mapping
+    const seoMap = {
+        'compress-jpg-to-10kb': { kb: 10, title: 'Compress JPG to 10KB', desc: 'Fast and free online tool to compress JPG images exactly to 10KB without losing quality.' },
+        'compress-jpg-to-20kb': { kb: 20, title: 'Compress JPG to 20KB', desc: 'Securely compress your JPG images to 20KB. Best for official form uploads.' },
+        'compress-jpg-to-30kb': { kb: 30, title: 'Compress JPG to 30KB', desc: 'Reduce JPG file size to 30KB online. Perfect for web optimization.' },
+        'compress-jpg-to-50kb': { kb: 50, title: 'Compress JPG to 50KB', desc: 'Convert JPG to 50KB in seconds. Professional quality compression.' },
+        'compress-jpg-to-100kb': { kb: 100, title: 'Compress JPG to 100KB', desc: 'High-quality JPG compression to 100KB. Ideal for email attachments.' }
+    };
+
+    const currentSeo = seoMap[targetSlug] || {
+        kb: null,
+        title: 'Free Image Resizer - Resize & Optimize Photos',
+        desc: 'Resize and optimize your images in seconds. Fast, easy, and 100% private. No upload limits.'
+    };
 
     const itemVariants = {
         hidden: { y: 30, opacity: 0 },
@@ -123,6 +139,11 @@ function Home() {
 
     return (
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] selection:bg-[#F63049]/10 font-sans overflow-x-hidden">
+            <SEOHead
+                title={currentSeo.title}
+                description={currentSeo.desc}
+                slug={targetSlug ? `/${targetSlug}` : ''}
+            />
             <div className="noise-overlay" />
 
             <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -158,18 +179,17 @@ function Home() {
                         >
                             <div className="inline-flex items-center space-x-3 px-6 py-2 rounded-full bg-[#F63049]/5 border border-[#F63049]/10 backdrop-blur-md mb-4 animate-float">
                                 <div className="w-1.5 h-1.5 rounded-full bg-[#F63049] animate-pulse" />
-                                <span className="text-[11px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">Professional Mode</span>
+                                <span className="text-[11px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">Free Tool</span>
                             </div>
 
                             <h1 className="text-[12vw] sm:text-8xl md:text-[10rem] font-black text-[#F63049] tracking-[-0.07em] leading-[0.8] uppercase flex flex-col items-center">
-                                <span>Precision</span>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752] translate-y-[-10%]">Imaging.</span>
+                                <span>Free Image</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752] translate-y-[-10%]">Resizer</span>
                             </h1>
 
                             <div className="max-w-2xl mx-auto space-y-8">
                                 <p className="text-xl md:text-2xl text-[#8A244B]/80 font-medium leading-relaxed tracking-tight">
-                                    High-performance image synthesis and manipulation platform. <br />
-                                    Engineered with corporate-grade security for enterprise assets.
+                                    {targetSlug ? currentSeo.desc : 'Resize images in seconds'}
                                 </p>
                             </div>
                         </motion.div>
@@ -234,6 +254,7 @@ function Home() {
                                         previewSize={imageData?.previewSize}
                                         crop={crop}
                                         rotation={rotation}
+                                        initialMaxSizeKB={currentSeo.kb}
                                     />
                                 </div>
                             </motion.div>
@@ -242,28 +263,91 @@ function Home() {
                 </motion.div>
 
                 {imageData === null && (
-                    <div className="mt-48 grid grid-cols-1 md:grid-cols-3 gap-16">
-                        {[
-                            { icon: Zap, title: "Neural Warp", desc: "Proprietary upscaling algorithms optimized for precision." },
-                            { icon: Shield, title: "Secure Core", desc: "Enterprise-grade data isolation and ephemeral processing." },
-                            { icon: LayoutGrid, title: "Parallel Engine", desc: "High-throughput batch processing for rapid deployment." }
-                        ].map((feature) => (
-                            <div key={feature.title} className="space-y-8">
-                                <div className="w-16 h-16 rounded-2xl bg-[#F63049]/5 border border-[#F63049]/10 flex items-center justify-center text-[#F63049]">
-                                    <feature.icon className="w-8 h-8" />
+                    <motion.section
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="mt-32 space-y-16"
+                    >
+                        <div className="text-center space-y-4">
+                            <h2 className="text-3xl font-black text-[#F63049] uppercase tracking-tighter">How it works</h2>
+                            <p className="text-[#8A244B]/60 font-medium">Simplify your workflow in three easy steps</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {[
+                                { step: "01", title: "Upload your image", desc: "Drag & drop your image or click to browse from your device." },
+                                { step: "02", title: "Resize your image", desc: "Enter custom dimensions or choose a preset size instantly." },
+                                { step: "03", title: "Download optimized image", desc: "Get your resized image in seconds, ready for web or sharing." }
+                            ].map((item, i) => (
+                                <div key={i} className="relative p-10 rounded-[40px] bg-[#F63049]/5 border border-[#F63049]/10 group hover:bg-white hover:shadow-2xl hover:shadow-[#F63049]/5 transition-all duration-500">
+                                    <span className="absolute top-8 right-10 text-4xl font-black text-[#F63049]/10 group-hover:text-[#F63049]/20 transition-colors">{item.step}</span>
+                                    <div className="space-y-4">
+                                        <h3 className="text-xl font-black text-[#D02752] uppercase tracking-tight">{item.title}</h3>
+                                        <p className="text-[#8A244B]/70 leading-relaxed text-sm font-medium">{item.desc}</p>
+                                    </div>
                                 </div>
-                                <div className="space-y-4">
-                                    <h3 className="text-xl font-black text-[#D02752] uppercase">{feature.title}</h3>
-                                    <p className="text-[#8A244B]/70 text-base leading-relaxed">{feature.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    </motion.section>
+                )}
+
+                {imageData === null && (
+                    <motion.section
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="mt-48 space-y-24"
+                    >
+                        <div className="text-center space-y-6">
+                            <h2 className="text-4xl md:text-5xl font-black text-[#F63049] uppercase tracking-tighter">Why Choose XResizer</h2>
+                            <p className="text-lg text-[#8A244B]/60 font-medium max-w-2xl mx-auto">Professional tools designed for everyone. Fast, free, and secure.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                            {[
+                                { icon: Target, title: "No Quality Loss", desc: "Resize images without losing visual clarity or sharpness." },
+                                { icon: Zap, title: "Instant Resizing", desc: "Resize your images in seconds with fast local-first processing." },
+                                { icon: MousePointer2, title: "Easy To Use", desc: "Upload, resize, and download — it's that simple." },
+                                { icon: Globe, title: "Works Anywhere", desc: "Browser-based tool that works on all devices and platforms." },
+                                { icon: ShieldCheck, title: "Privacy Guaranteed", desc: "Your images are processed securely and never stored." },
+                                { icon: Gift, title: "Completely Free", desc: "No login, no watermark, and no hidden limits." }
+                            ].map((feature, i) => (
+                                <motion.div
+                                    key={feature.title}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    whileHover={{ y: -12, scale: 1.02 }}
+                                    viewport={{ once: true }}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 400,
+                                        damping: 25,
+                                        delay: i * 0.05
+                                    }}
+                                    className="relative p-10 rounded-[40px] bg-white border border-[#F63049]/10 hover:border-[#F63049]/30 transition-all duration-500 group overflow-hidden"
+                                >
+                                    {/* Animated Background Highlight */}
+                                    <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-[#F63049] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                                    <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#F63049]/[0.02] rounded-full blur-3xl group-hover:bg-[#F63049]/5 transition-colors duration-700" />
+
+                                    <div className="w-16 h-16 rounded-[24px] bg-[#F63049]/5 flex items-center justify-center text-[#F63049] mb-8 group-hover:scale-110 group-hover:bg-[#F63049] group-hover:text-white transition-all duration-500 shadow-sm relative z-10">
+                                        <feature.icon className="w-8 h-8" />
+                                    </div>
+                                    <div className="space-y-4 relative z-10">
+                                        <h3 className="text-xl font-black text-[#D02752] uppercase tracking-tight group-hover:text-[#F63049] transition-colors">{feature.title}</h3>
+                                        <p className="text-[#8A244B]/70 text-base leading-relaxed font-medium transition-colors group-hover:text-[#8A244B]">{feature.desc}</p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </motion.section>
                 )}
             </main>
 
 
-            <IntelligenceNetwork />
         </div>
     );
 }

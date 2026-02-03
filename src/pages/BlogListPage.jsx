@@ -13,7 +13,6 @@ import { Link } from 'react-router-dom';
 import blogService from '../services/blogService';
 import SEOHead from '../components/SEOHead';
 import Navbar from '../components/Navbar';
-import IntelligenceNetwork from '../components/IntelligenceNetwork';
 
 const BlogListPage = () => {
     const [blogs, setBlogs] = useState([]);
@@ -46,8 +45,8 @@ const BlogListPage = () => {
     return (
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans overflow-x-hidden pt-24">
             <SEOHead
-                title="Resources & Insights"
-                description="Expert imaging strategies, neural upscaling insights, and enterprise-grade asset management workflows."
+                title="Blog"
+                description="Latest updates, tips, and guides for image resizing and optimization."
                 slug="/blog"
             />
 
@@ -70,16 +69,16 @@ const BlogListPage = () => {
                 >
                     <div className="inline-flex items-center space-x-3 px-6 py-2 rounded-full bg-[#F63049]/5 border border-[#F63049]/10 backdrop-blur-md mb-4">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#F63049] animate-pulse" />
-                        <span className="text-[10px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">The Knowledge Matrix</span>
+                        <span className="text-[10px] font-black tracking-[0.3rem] uppercase text-[#F63049]/80">Blog & Resources</span>
                     </div>
 
                     <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#F63049] uppercase leading-[0.9]">
-                        Insights <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752]">&</span> Strategies.
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F63049] to-[#D02752]">BLOG</span>
                     </h1>
 
                     <p className="max-w-2xl mx-auto text-lg md:text-xl text-[#8A244B]/60 font-medium leading-relaxed">
-                        Exploration of digital asset synthesis, neural upscaling, <br className="hidden md:block" />
-                        and precision imaging for the modern enterprise.
+                        Master image resizing and optimization. <br className="hidden md:block" />
+                        Get practical tips, tutorials, and guides for beginners to pros.
                     </p>
                 </motion.div>
 
@@ -160,7 +159,7 @@ const BlogListPage = () => {
                                                     </div>
                                                     <div className="flex items-center space-x-2">
                                                         <Clock className="w-3 h-3" />
-                                                        <span>{blog.readTime}m Min Sync</span>
+                                                        <span>{blog.readTime} min read</span>
                                                     </div>
                                                 </div>
 
@@ -173,7 +172,7 @@ const BlogListPage = () => {
                                                 </p>
 
                                                 <div className="pt-4 flex items-center text-[#F63049] text-[10px] font-black uppercase tracking-[0.3em] group/btn">
-                                                    <span>Decipher Node</span>
+                                                    <span>Read More</span>
                                                     <ChevronRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-2 transition-transform" />
                                                 </div>
                                             </div>
@@ -186,25 +185,12 @@ const BlogListPage = () => {
                 ) : (
                     <div className="text-center py-40 bg-[#F63049]/[0.02] rounded-[48px] border-2 border-dashed border-[#F63049]/10 mt-12">
                         <Loader2 className="w-12 h-12 text-[#F63049]/10 mx-auto mb-6" />
-                        <h3 className="text-xl font-black uppercase tracking-tight text-[#8A244B]/30">Archive Entry Not Found</h3>
-                        <p className="text-[#8A244B]/20 text-xs font-bold uppercase tracking-widest mt-2">Adjust search parameters in the matrix</p>
+                        <h3 className="text-xl font-black uppercase tracking-tight text-[#8A244B]/30">No post found</h3>
+                        <p className="text-[#8A244B]/20 text-xs font-bold uppercase tracking-widest mt-2">Try adjusting your search filters</p>
                     </div>
                 )}
             </section>
-            <IntelligenceNetwork />
 
-            {/* Footer */}
-            <footer className="py-24 px-8 border-t border-[#F63049]/5">
-                <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-                    <div className="flex flex-col items-center md:items-start space-y-4">
-                        <span className="text-2xl font-black tracking-tighter uppercase text-[#F63049]">RESIZELY</span>
-                        <p className="text-[10px] font-bold tracking-[0.3em] text-[#8A244B]/30 uppercase">Knowledge Matrix Division</p>
-                    </div>
-                    <p className="text-[10px] font-black tracking-[0.2em] text-[#8A244B]/10 uppercase">
-                        RESIZELY TECHNOLOGY GROUP © 2026
-                    </p>
-                </div>
-            </footer>
         </div>
     );
 };

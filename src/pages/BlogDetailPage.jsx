@@ -195,7 +195,7 @@ const BlogDetailPage = () => {
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Clock className="w-3.5 h-3.5" />
-                                <span>{blog.readTime}m Min Sync</span>
+                                <span>{blog.readTime} min read</span>
                             </div>
                         </div>
                     </div>
@@ -209,7 +209,7 @@ const BlogDetailPage = () => {
                             <User className="w-6 h-6 text-[#F63049]" />
                         </div>
                         <div className="text-left">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-[#F63049]">Resizely Core Staff</p>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-[#F63049]">XResizer Core Staff</p>
                             <p className="text-[9px] font-bold uppercase tracking-widest text-[#8A244B]/30 mt-0.5">Imaging Specialist</p>
                         </div>
                     </div>
@@ -274,21 +274,21 @@ const BlogDetailPage = () => {
                                 <ul className="space-y-4">
                                     <li className="flex items-start space-x-3">
                                         <div className="w-1.5 h-1.5 bg-[#F63049] rounded-full mt-1.5" />
-                                        <p className="text-[11px] font-bold text-[#8A244B]/70 leading-relaxed uppercase tracking-wider">Neural precision workflows</p>
+                                        <p className="text-[11px] font-bold text-[#8A244B]/70 leading-relaxed uppercase tracking-wider">Fast & Secure Processing</p>
                                     </li>
                                     <li className="flex items-start space-x-3">
                                         <div className="w-1.5 h-1.5 bg-[#F63049] rounded-full mt-1.5" />
-                                        <p className="text-[11px] font-bold text-[#8A244B]/70 leading-relaxed uppercase tracking-wider">Enterprise asset scaling</p>
+                                        <p className="text-[11px] font-bold text-[#8A244B]/70 leading-relaxed uppercase tracking-wider">Browser-based Resizing</p>
                                     </li>
                                 </ul>
                             </div>
 
                             <div className="bg-[#8A244B] rounded-[40px] p-8 text-white relative overflow-hidden">
                                 <div className="absolute top-[-20%] right-[-20%] w-[120px] h-[120px] bg-white opacity-[0.05] rounded-full blur-2xl" />
-                                <h3 className="text-sm font-black uppercase tracking-widest mb-4">Precision Engine</h3>
-                                <p className="text-white/50 text-xs leading-relaxed mb-6 font-medium">Ready to deploy these insights to your own assets? Start resizing now.</p>
+                                <h3 className="text-sm font-black uppercase tracking-widest mb-4">Start Resizing</h3>
+                                <p className="text-white/50 text-xs leading-relaxed mb-6 font-medium">Ready to optimize your images? Use our free tool now.</p>
                                 <Link to="/" className="inline-flex items-center text-[10px] font-black uppercase tracking-widest text-white hover:text-[#F63049] transition-colors">
-                                    Launch Accelerator <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                                    Go to Resizer <ArrowRight className="w-3.5 h-3.5 ml-2" />
                                 </Link>
                             </div>
                         </div>
@@ -300,7 +300,7 @@ const BlogDetailPage = () => {
             {relatedBlogs.length > 0 && (
                 <section className="max-w-[1400px] mx-auto px-8 mt-40">
                     <div className="flex items-center justify-between mb-16 border-b border-[#F63049]/5 pb-8">
-                        <h2 className="text-3xl font-black tracking-tighter text-[#F63049] uppercase">Related <span className="opacity-30">Nodes</span></h2>
+                        <h2 className="text-3xl font-black tracking-tighter text-[#F63049] uppercase">Related <span className="opacity-30">Posts</span></h2>
                         <Link to="/blog" className="text-[10px] font-black uppercase tracking-widest text-[#F63049] hover:underline underline-offset-4">Browse Archive</Link>
                     </div>
 

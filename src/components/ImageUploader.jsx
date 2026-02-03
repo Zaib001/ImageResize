@@ -49,9 +49,31 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
         }
 
         const url = URL.createObjectURL(file);
+        let imageLoaded = false;
+        let timeoutId;
 
         const img = new Image();
+
+        // Set a timeout to prevent hanging
+        timeoutId = setTimeout(() => {
+            if (!imageLoaded) {
+                console.error('Image load timeout');
+                setError('IMAGE LOAD TIMEOUT. PLEASE TRY AGAIN.');
+                URL.revokeObjectURL(url);
+            }
+        }, 10000); // 10 second timeout
+
         img.onload = () => {
+            imageLoaded = true;
+            clearTimeout(timeoutId);
+
+            console.log('Image loaded successfully:', {
+                width: img.naturalWidth,
+                height: img.naturalHeight,
+                type: file.type,
+                size: file.size
+            });
+
             setImgDimensions({
                 naturalWidth: img.naturalWidth,
                 naturalHeight: img.naturalHeight
@@ -66,16 +88,33 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                 width: img.naturalWidth,
                 height: img.naturalHeight
             });
-
-            console.log('Image loaded with dimensions:', {
-                width: img.naturalWidth,
-                height: img.naturalHeight
-            });
         };
-        img.onerror = () => {
-            setError('FAILED TO READ IMAGE DIMENSIONS.');
+
+        img.onerror = (e) => {
+            imageLoaded = true;
+            clearTimeout(timeoutId);
+
+            console.error('Image load error:', {
+                error: e,
+                fileType: file.type,
+                fileName: file.name,
+                fileSize: file.size
+            });
+
+            // Try to provide more specific error message
+            if (file.size === 0) {
+                setError('EMPTY FILE DETECTED. PLEASE SELECT A VALID IMAGE.');
+            } else if (!file.type.startsWith('image/')) {
+                setError('INVALID FILE TYPE. PLEASE SELECT AN IMAGE FILE.');
+            } else {
+                setError('FAILED TO LOAD IMAGE. FILE MAY BE CORRUPTED.');
+            }
+
             URL.revokeObjectURL(url);
         };
+
+        // Set crossOrigin to anonymous to avoid CORS issues
+        img.crossOrigin = 'anonymous';
         img.src = url;
     };
 
@@ -224,9 +263,9 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                         </div>
 
                         <div className="text-center relative space-y-4">
-                            <h2 className="text-4xl font-black text-[#F63049] tracking-[-0.05em] uppercase">Initialize Asset</h2>
+                            <h2 className="text-4xl font-black text-[#F63049] tracking-[-0.05em] uppercase">Upload Image</h2>
                             <p className="text-xs font-black text-[#8A244B]/60 tracking-[0.4em] uppercase">
-                                Drop Image or <span className="text-[#F63049]">Locate</span>
+                                Drop Image or <span className="text-[#F63049]">Browse</span>
                             </p>
                         </div>
 
@@ -243,7 +282,7 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                             </div>
                             <div className="flex items-center space-x-3 text-[10px] font-black uppercase tracking-[0.3em] text-[#8A244B]/40 group-hover:text-[#F63049]/60 transition-colors">
                                 <Shield className="w-4 h-4" />
-                                <span>Securing Assets</span>
+                                <span>Safe & Secure</span>
                             </div>
                         </div>
                     </motion.div>
@@ -291,7 +330,7 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                             <div className="absolute top-3 sm:top-6 left-3 sm:left-6 flex items-center space-x-2 sm:space-x-3">
                                 <div className="flex items-center space-x-2 sm:space-x-3 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white/90 backdrop-blur-xl border border-[#D02752]/20 shadow-md">
                                     <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#F63049] animate-pulse" />
-                                    <span className="text-[9px] sm:text-[10px] font-black text-[#D02752] tracking-[0.1em] sm:tracking-[0.2em] uppercase hidden xs:inline">Validated</span>
+                                    <span className="text-[9px] sm:text-[10px] font-black text-[#D02752] tracking-[0.1em] sm:tracking-[0.2em] uppercase hidden xs:inline">Ready to Resize</span>
                                     <span className="text-[9px] sm:text-[10px] font-black text-[#D02752] tracking-[0.1em] sm:tracking-[0.2em] uppercase xs:hidden">✓</span>
                                 </div>
                             </div>
@@ -404,7 +443,7 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
 
                             <div className="flex items-center space-x-2 sm:space-x-4 text-[9px] sm:text-[10px] font-black text-[#8A244B]/50 uppercase tracking-[0.2em] sm:tracking-[0.4em] bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-[#D02752]/5 w-full md:w-auto justify-center shadow-sm">
                                 <Maximize2 className="w-4 sm:w-5 h-4 sm:h-5 mr-1 sm:mr-2 text-[#F63049]" />
-                                <span className="hidden sm:inline">Local Session Active</span>
+                                <span className="hidden sm:inline">Processing Locally</span>
                                 <span className="sm:hidden">Active</span>
                             </div>
                         </div>

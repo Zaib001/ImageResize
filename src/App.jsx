@@ -23,6 +23,7 @@ import ContactList from './pages/admin/ContactList';
 
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import CookieConsent from './components/CookieConsent';
 
 // Initialize GA4
 const GA_MEASUREMENT_ID = "G-JL6E28N36L";
@@ -37,7 +38,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!token) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/access-xresizer-secure-portal" replace />;
   }
 
   return children;
@@ -49,14 +50,22 @@ const AppContent = () => {
   const isAdmin = location.pathname.startsWith('/admin');
 
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+    const consent = localStorage.getItem('xresizer_cookie_consent');
+    if (consent === 'true') {
+      ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+    }
   }, [location]);
+
+  const handleCookieAccept = () => {
+    ReactGA.send({ hitType: "pageview", page: location.pathname + location.search });
+  };
 
   return (
     <>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
+        <Route path="/:targetSlug" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
@@ -65,7 +74,7 @@ const AppContent = () => {
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
 
         {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/access-xresizer-secure-portal" element={<AdminLogin />} />
         <Route
           path="/admin/*"
           element={
@@ -90,6 +99,7 @@ const AppContent = () => {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {!isAdmin && <Footer />}
+      <CookieConsent onAccept={handleCookieAccept} />
     </>
   );
 };

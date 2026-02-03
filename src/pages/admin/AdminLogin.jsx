@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Mail, Eye, EyeOff, Loader2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, Loader2, ArrowRight, ShieldCheck, Fingerprint } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import authService from '../../services/authService';
 
@@ -29,6 +29,33 @@ const AdminLogin = () => {
             }
         } catch (err) {
             setError(err.response?.data?.message || 'Invalid credentials or server error');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handlePasskeyLogin = async () => {
+        if (!email) {
+            setError('Please enter your email address above, then click "Access with Passkey"');
+            // Focus the email input
+            document.querySelector('input[type="email"]')?.focus();
+            return;
+        }
+
+        setIsLoading(true);
+        setError('');
+
+        try {
+            const result = await authService.loginWithPasskey(email);
+            if (result.success) {
+                login(result.data.admin, result.data.token);
+                navigate('/admin/dashboard');
+            } else {
+                setError(result.message || 'Passkey login failed');
+            }
+        } catch (err) {
+            console.error('Passkey login error:', err);
+            setError(err.response?.data?.error || err.message || 'Passkey authentication failed');
         } finally {
             setIsLoading(false);
         }
@@ -94,7 +121,7 @@ const AdminLogin = () => {
                                     required
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="admin@resizely.core"
+                                    placeholder="admin@xresizer.com"
                                     className="w-full pl-12 pr-4 py-4 bg-[#F63049]/5 border border-transparent rounded-2xl focus:border-[#F63049]/20 focus:bg-white transition-all outline-none font-medium placeholder:text-[#8A244B]/20"
                                 />
                             </div>
@@ -130,7 +157,10 @@ const AdminLogin = () => {
                             <motion.div
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="bg-[#F63049]/5 border border-[#F63049]/20 text-[#F63049] text-[11px] font-bold p-3 rounded-xl text-center uppercase tracking-wider"
+                                className={`p-3 rounded-xl text-center uppercase tracking-wider text-[11px] font-bold border ${error.includes('Passkey Authentication Required')
+                                    ? 'bg-[#F63049]/10 border-[#F63049] text-[#F63049]'
+                                    : 'bg-[#F63049]/5 border-[#F63049]/20 text-[#F63049]'
+                                    }`}
                             >
                                 {error}
                             </motion.div>
@@ -150,6 +180,27 @@ const AdminLogin = () => {
                                     <ArrowRight className="w-5 h-5" />
                                 </>
                             )}
+                        </motion.button>
+
+                        <div className="relative my-8">
+                            <div className="absolute inset-0 flex items-center">
+                                <div className="w-full border-t border-[#F63049]/10"></div>
+                            </div>
+                            <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest">
+                                <span className="px-4 bg-white text-[#8A244B]/30">Biometric Secure</span>
+                            </div>
+                        </div>
+
+                        <motion.button
+                            type="button"
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={handlePasskeyLogin}
+                            disabled={isLoading}
+                            className="w-full py-4 bg-white border-2 border-[#F63049]/10 text-[#F63049] rounded-2xl font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <Fingerprint className="w-5 h-5" />
+                            <span>Access with Passkey</span>
                         </motion.button>
                     </form>
 

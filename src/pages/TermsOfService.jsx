@@ -9,7 +9,7 @@ const TermsOfService = () => {
             <Navbar />
             <SEOHead
                 title="Terms of Service"
-                description="Terms of Service for using Resizely image tools."
+                description="Terms of Service for using XResizer image tools."
                 slug="terms"
             />
 
@@ -21,52 +21,53 @@ const TermsOfService = () => {
                 >
                     <h1 className="text-4xl md:text-5xl font-black text-[#F63049] uppercase tracking-tighter mb-8">Terms of Service</h1>
 
-                    <div className="prose prose-lg prose-rose max-w-none text-[#8A244B]/80">
+                    <div className="prose prose-lg prose-rose max-w-none text-[#8A244B]/80 font-medium">
                         <p className="lead">Last Updated: {new Date().toLocaleDateString()}</p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">1. Terms</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">1. Terms</h3>
                         <p>
-                            By accessing this website, you are agreeing to be bound by these website Terms and Conditions of Use, all applicable laws and regulations,
-                            and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms,
-                            you are prohibited from using or accessing this site.
+                            By accessing xResizer, you are agreeing to be bound by these Terms of Service. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">2. Use License</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">2. Use License & Restrictions</h3>
                         <p>
-                            Permission is granted to temporarily download one copy of the materials (information or software) on Resizely's website for personal,
-                            non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                            Permission is granted to use xResizer for personal and commercial image resizing. However, you are strictly prohibited from:
                         </p>
                         <ul className="list-disc pl-5 space-y-2">
-                            <li>modify or copy the materials;</li>
-                            <li>use the materials for any commercial purpose, or for any public display (commercial or non-commercial);</li>
-                            <li>attempt to decompile or reverse engineer any software contained on Resizely's website;</li>
-                            <li>remove any copyright or other proprietary notations from the materials; or</li>
-                            <li>transfer the materials to another person or "mirror" the materials on any other server.</li>
+                            <li>Misusing the service using automated bots, scripts, or excessive API calls.</li>
+                            <li>Attempting to reverse engineer any software contained on xResizer's website.</li>
+                            <li>Using the service for illegal activities or to process copyrighted material you do not own.</li>
                         </ul>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">3. Disclaimer</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">3. User Responsibility & Liability</h3>
                         <p>
-                            The materials on Resizely's website are provided "as is". Resizely makes no warranties, expressed or implied, and hereby disclaims and negates
-                            all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose,
-                            or non-infringement of intellectual property or other violation of rights.
+                            <strong>Content Liability:</strong> You are fully responsible for the images and files you upload, convert, or download using this website. xResizer acts solely as a processing tool and claims no ownership over user content.
+                        </p>
+                        <p>
+                            <strong>Copyright Disclaimer:</strong> xResizer is not responsible for any copyrighted content processed by users. You must ensure you have the necessary rights to edit or convert any files you upload.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">4. Limitations</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">4. Data Handling & Security</h3>
                         <p>
-                            In no event shall Resizely or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit,
-                            or due to business interruption,) arising out of the use or inability to use the materials on Resizely's website.
+                            <strong>Temporary Storage:</strong> xResizer does not store images permanently. All files are processed temporarily in memory and are automatically deleted from our servers within 60 minutes.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">5. Revisions and Errata</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">5. Service Availability</h3>
                         <p>
-                            The materials appearing on Resizely's website could include technical, typographical, or photographic errors.
-                            Resizely does not warrant that any of the materials on its website are accurate, complete, or current.
+                            We strive for high uptime but do not guarantee uninterrupted or error-free service at all times. xResizer is provided "as is," and we reserve the right to modify or discontinue features without notice.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">6. Links</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">6. Limitations</h3>
                         <p>
-                            Resizely has not reviewed all of the sites linked to its Internet web site and is not responsible for the contents of any such linked site.
-                            The inclusion of any link does not imply endorsement by Resizely of the site. Use of any such linked web site is at the user's own risk.
+                            In no event shall xResizer or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit) arising out of the use or inability to use the materials on xResizer's website.
+                        </p>
+
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">7. Contact & Support</h3>
+                        <p>
+                            For any concerns regarding these terms or service issues, please contact our support team directly:
+                        </p>
+                        <p className="text-[#F63049] font-bold">
+                            Email: <a href="mailto:support@xresizer.com" className="hover:underline">support@xresizer.com</a>
                         </p>
                     </div>
                 </motion.div>

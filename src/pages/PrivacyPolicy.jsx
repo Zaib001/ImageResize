@@ -9,7 +9,7 @@ const PrivacyPolicy = () => {
             <Navbar />
             <SEOHead
                 title="Privacy Policy"
-                description="Privacy Policy for Resizely - Learn how we protect your data."
+                description="Privacy Policy for XResizer - Learn how we protect your data."
                 slug="privacy"
             />
 
@@ -21,55 +21,59 @@ const PrivacyPolicy = () => {
                 >
                     <h1 className="text-4xl md:text-5xl font-black text-[#F63049] uppercase tracking-tighter mb-8">Privacy Policy</h1>
 
-                    <div className="prose prose-lg prose-rose max-w-none text-[#8A244B]/80">
+                    <div className="prose prose-lg prose-rose max-w-none text-[#8A244B]/80 font-medium">
                         <p className="lead">Effective Date: {new Date().toLocaleDateString()}</p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">1. Introduction</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">1. Introduction</h3>
                         <p>
-                            Welcome to Resizely ("we," "our," or "us"). We are committed to protecting your privacy and ensuring you have a positive experience on our website.
-                            This Privacy Policy explains how we handle data when you use our image resizing services.
+                            Welcome to xResizer ("we," "our," or "us"). We are committed to protecting your privacy and ensuring transparency in how we handle your data. This Privacy Policy specifically outlines our practices regarding data collection, processing, and storage when using our free image resizing tool.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">2. Information We Collect</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">2. Information We Collect</h3>
                         <p>
-                            <strong>Uploaded Images:</strong> Images uploaded to our service are processed temporarily for the purpose of resizing and editing.
-                            We do not permanently store your images on our servers. They are processed in memory and are typically deleted immediately after the processed image is generated or within a short retention period for performance buffering.
+                            <strong>Uploaded Images & Processing:</strong>
+                            <br />
+                            Images uploaded to xResizer are processed temporarily for the sole purpose of resizing and optimization.
+                            <strong> We do not permanently store your images.</strong> All processed files are automatically deleted from our servers within <strong>60 minutes</strong> after processing. We strictly respect your privacy—your photos are never sold, shared, or used for training AI models.
                         </p>
                         <p>
-                            <strong>Usage Data:</strong> We use tools like Google Analytics to collect anonymous information about how our website is accessed and used. This may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, and other diagnostic data.
-                        </p>
-
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">3. Cookies and Tracking Technologies</h3>
-                        <p>
-                            We use cookies and similar tracking technologies to track the activity on our Service and hold certain information.
-                            You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+                            <strong>Usage Data & Analytics:</strong>
+                            <br />
+                            We use <strong>Google Analytics (GA4)</strong> to collect anonymous usage data. This helps us understand how the tool is used (e.g., popular screen sizes, browser types, session duration) to improve performance. This data does not quantify personally identifiable information.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">4. Data Security</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">3. Cookies & Tracking Technologies</h3>
                         <p>
-                            The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure.
-                            While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
+                            <strong>Google Services:</strong>
+                            <br />
+                            We use cookies served by Google Analytics and other Google services to analyze traffic and improve user experience. These third-party cookies process data such as your IP address and browsing behavior.
                         </p>
-
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">5. Third-Party Services</h3>
                         <p>
-                            We may employ third-party companies and individuals due to the following reasons:
+                            <strong>Advertising Disclosure:</strong>
+                            <br />
+                            We may use third-party advertising services (e.g., Google AdSense) in the future, which may use cookies to serve ads based on your prior visits to our website or other websites.
+                        </p>
+                        <p>
+                            <strong>User Consent & Control:</strong>
+                            <br />
+                            Cookies are only activated after you provide consent via our cookie consent banner. You retain full control over your data usage:
                         </p>
                         <ul className="list-disc pl-5 space-y-2">
-                            <li>To facilitate our Service;</li>
-                            <li>To provide the Service on our behalf;</li>
-                            <li>To perform Service-related services; or</li>
-                            <li>To assist us in analyzing how our Service is used.</li>
+                            <li>You can withdraw consent at any time.</li>
+                            <li>You can disable cookies directly through your browser settings.</li>
                         </ul>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">6. Changes to This Privacy Policy</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">4. Data Security</h3>
                         <p>
-                            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
+                            We employ standard security protocols (HTTPS/SSL) to encrypt data during transmission. While we implement strict temporary storage policies (automatic 60-minute deletion), please note that no method of transmission over the Internet is 100% secure.
                         </p>
 
-                        <h3 className="text-xl font-bold text-[#D02752] mt-8 mb-4 uppercase">7. Contact Us</h3>
+                        <h3 className="text-xl font-black text-[#D02752] mt-8 mb-4 uppercase tracking-tight">5. Contact Us</h3>
                         <p>
-                            If you have any questions about this Privacy Policy, please contact us via email.
+                            If you have specific questions about our privacy practices, data handling, or wish to exercise your rights, please contact us directly:
+                        </p>
+                        <p className="text-[#F63049] font-bold">
+                            Email: <a href="mailto:support@xresizer.com" className="hover:underline">support@xresizer.com</a>
                         </p>
                     </div>
                 </motion.div>

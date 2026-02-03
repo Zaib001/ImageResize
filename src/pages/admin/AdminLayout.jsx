@@ -34,7 +34,7 @@ const AdminLayout = () => {
 
     const handleLogout = () => {
         logout();
-        navigate('/admin/login');
+        navigate('/access-xresizer-secure-portal');
     };
 
     return (

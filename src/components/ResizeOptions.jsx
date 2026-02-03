@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Settings2, Download, Zap, Sparkles, HardDrive, Printer, Info } from 'lucide-react';
 import { api } from '../services/api';
 
-const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, crop, rotation }) => {
+const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, crop, rotation, initialMaxSizeKB = null }) => {
     const [width, setWidth] = useState(1920);
     const [height, setHeight] = useState(1080);
     const [unit, setUnit] = useState('px');
@@ -11,10 +11,11 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
     const [format, setFormat] = useState('jpeg');
     const [quality, setQuality] = useState(90);
     const [backgroundColor, setBackgroundColor] = useState('#FFFFFF');
-    const [maxSizeKB, setMaxSizeKB] = useState(null);
+    const [maxSizeKB, setMaxSizeKB] = useState(initialMaxSizeKB);
     const [resolutionMode, setResolutionMode] = useState('auto');
     const [dpi, setDpi] = useState(300);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [error, setError] = useState(null);
 
     const lastImageName = React.useRef(imageFile?.name);
 
@@ -25,22 +26,56 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
             if (initialDimensions?.width && initialDimensions?.height) {
                 setWidth(initialDimensions.width);
                 setHeight(initialDimensions.height);
+                setError(null);
             }
         }
     }, [initialDimensions, imageFile]);
 
-    // Removed auto-sync to prevent bouncing - users have manual control
+    // Handle initialMaxSizeKB updates
+    useEffect(() => {
+        if (initialMaxSizeKB !== null) {
+            setMaxSizeKB(initialMaxSizeKB);
+        }
+    }, [initialMaxSizeKB]);
+
+    // Validation logic
+    const validateDimensions = (w, h, u) => {
+        const currentDpi = resolutionMode === 'auto' ? (['in', 'cm', 'mm'].includes(u) ? 300 : 96) : dpi;
+        let pxWidth = Number(w);
+        let pxHeight = Number(h);
+
+        if (u === 'in') {
+            pxWidth = w * currentDpi;
+            pxHeight = h * currentDpi;
+        } else if (u === 'cm') {
+            pxWidth = (w / 2.54) * currentDpi;
+            pxHeight = (h / 2.54) * currentDpi;
+        } else if (u === 'mm') {
+            pxWidth = (w / 25.4) * currentDpi;
+            pxHeight = (h / 25.4) * currentDpi;
+        }
+
+        if (pxWidth < 10 || pxHeight < 10 || pxWidth > 8000 || pxHeight > 8000) {
+            return "Please enter a value between 10 and 8000 pixels.";
+        }
+        return null;
+    };
 
     // Unified debounce for ALL parameters
     useEffect(() => {
-        const timer = setTimeout(() => {
-            onResize({
-                width, height, unit, mode, format,
-                quality, backgroundColor, maxSizeKB,
-                resolutionMode, dpi, crop, rotation
-            });
-        }, 500);
-        return () => clearTimeout(timer);
+        const validationError = validateDimensions(width, height, unit);
+        setError(validationError);
+
+        if (!validationError) {
+            const timer = setTimeout(() => {
+                onResize({
+                    width, height, unit, mode, format,
+                    quality, backgroundColor, maxSizeKB,
+                    resolutionMode, dpi, crop, rotation
+                });
+            }, 500);
+            return () => clearTimeout(timer);
+        }
     }, [
         width, height, unit, mode, format,
         quality, backgroundColor, maxSizeKB,
@@ -48,6 +83,12 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
     ]);
 
     const handleDownload = async () => {
+        const validationError = validateDimensions(width, height, unit);
+        if (validationError) {
+            alert(validationError);
+            return;
+        }
+
         if (!imageFile) {
             alert('Please upload an image first');
             return;
@@ -192,6 +233,24 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
                         <span className="text-[9px] sm:text-[10px] md:text-[11px] font-black text-[#D02752] uppercase tracking-wider sm:tracking-widest">Linked</span>
                     </div>
                 </div>
+
+                <AnimatePresence>
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="bg-red-50 border border-red-200 rounded-xl p-3 flex items-start space-x-2"
+                        >
+                            <div className="p-1 bg-red-100 rounded-lg text-red-600 mt-0.5">
+                                <Info size={12} />
+                            </div>
+                            <p className="text-[11px] font-bold text-red-600 leading-tight">
+                                {error}
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-6">
                     <div className="space-y-2 sm:space-y-3">
