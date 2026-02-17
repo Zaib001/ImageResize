@@ -157,8 +157,8 @@ const BlogDetailPage = () => {
     return (
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans pb-32 overflow-x-hidden pt-24">
             <SEOHead
-                title={blog.metaTitle || blog.title}
-                description={blog.metaDescription || blog.excerpt}
+                title={(blog.metaTitle && blog.metaTitle.trim()) || blog.title}
+                description={(blog.metaDescription && blog.metaDescription.trim()) || blog.excerpt}
                 slug={`/blog/${blog.slug}`}
                 image={blog.featuredImage}
                 article={true}
