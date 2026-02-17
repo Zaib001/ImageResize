@@ -10,8 +10,8 @@ const AboutUs = () => {
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans">
             <Navbar />
             <SEOHead
-                title="About Us"
-                description="Learn about the team and technology behind XResizer."
+                title="About xResizer"
+                description="Learn about xResizer, a free online image resizing and compression tool focused on speed, simplicity and privacy."
                 slug="about"
             />
 

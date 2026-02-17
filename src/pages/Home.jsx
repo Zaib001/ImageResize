@@ -20,17 +20,37 @@ function Home() {
 
     // SEO Data Mapping
     const seoMap = {
-        'compress-jpg-to-10kb': { kb: 10, title: 'Compress JPG to 10KB', desc: 'Fast and free online tool to compress JPG images exactly to 10KB without losing quality.' },
-        'compress-jpg-to-20kb': { kb: 20, title: 'Compress JPG to 20KB', desc: 'Securely compress your JPG images to 20KB. Best for official form uploads.' },
-        'compress-jpg-to-30kb': { kb: 30, title: 'Compress JPG to 30KB', desc: 'Reduce JPG file size to 30KB online. Perfect for web optimization.' },
-        'compress-jpg-to-50kb': { kb: 50, title: 'Compress JPG to 50KB', desc: 'Convert JPG to 50KB in seconds. Professional quality compression.' },
-        'compress-jpg-to-100kb': { kb: 100, title: 'Compress JPG to 100KB', desc: 'High-quality JPG compression to 100KB. Ideal for email attachments.' }
+        'compress-jpg-to-10kb': {
+            kb: 10,
+            title: 'Compress JPG to 10KB Online Free',
+            desc: 'Compress JPG image to 10KB online for free. Reduce photo size for forms, exams and uploads without losing quality using xResizer.'
+        },
+        'compress-jpg-to-20kb': {
+            kb: 20,
+            title: 'Compress JPG to 20KB Online Free',
+            desc: 'Compress JPG image to 20KB online for free. Resize photo for documents and online forms without losing quality using xResizer.'
+        },
+        'compress-jpg-to-30kb': {
+            kb: 30,
+            title: 'Compress JPG to 30KB Online Free',
+            desc: 'Compress JPG image to 30KB online. Reduce photo size for applications and government forms without losing quality — free tool by xResizer.'
+        },
+        'compress-jpg-to-50kb': {
+            kb: 50,
+            title: 'Compress JPG to 50KB Online Free',
+            desc: 'Reduce JPG image size to 50KB online free. Perfect for passport, job and application forms. Fast compression without quality loss — xResizer.'
+        },
+        'compress-jpg-to-100kb': {
+            kb: 100,
+            title: 'Compress JPG to 100KB Online Free',
+            desc: 'Compress photo to 100KB online free. Resize JPG images for forms and website uploads without losing quality using xResizer.'
+        }
     };
 
     const currentSeo = seoMap[targetSlug] || {
         kb: null,
-        title: 'Free Image Resizer - Resize & Optimize Photos',
-        desc: 'Resize and optimize your images in seconds. Fast, easy, and 100% private. No upload limits.'
+        title: 'Resize & Compress Image Online (Reduce Photo Size in KB) Free',
+        desc: 'Free image resizer to reduce photo size in KB or MB online. Compress JPG, PNG, GIF and WEBP images for forms, email and social media without losing quality — xResizer.'
     };
 
     const itemVariants = {

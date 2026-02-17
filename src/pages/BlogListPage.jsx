@@ -45,8 +45,8 @@ const BlogListPage = () => {
     return (
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans overflow-x-hidden pt-24">
             <SEOHead
-                title="Blog"
-                description="Latest updates, tips, and guides for image resizing and optimization."
+                title="Image Resizing Guides, Tips & Tutorials - xResizer Blog"
+                description="Learn how to resize and compress images without losing quality. Practical guides, tutorials and tips for beginners to professionals — xResizer blog."
                 slug="/blog"
             />
 

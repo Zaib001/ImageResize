@@ -8,8 +8,8 @@ const TermsOfService = () => {
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans">
             <Navbar />
             <SEOHead
-                title="Terms of Service"
-                description="Terms of Service for using XResizer image tools."
+                title="Terms of Service - xResizer"
+                description="Terms of service for using xResizer image resizer and compressor tool. User responsibilities and usage guidelines explained."
                 slug="terms"
             />
 

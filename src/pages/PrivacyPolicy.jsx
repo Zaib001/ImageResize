@@ -8,8 +8,8 @@ const PrivacyPolicy = () => {
         <div className="min-h-screen bg-[#FFFFFF] text-[#8A244B] font-sans">
             <Navbar />
             <SEOHead
-                title="Privacy Policy"
-                description="Privacy Policy for XResizer - Learn how we protect your data."
+                title="Privacy Policy - xResizer"
+                description="Read the xResizer privacy policy explaining how images are processed temporarily and never stored permanently."
                 slug="privacy"
             />
 
