@@ -20,6 +20,7 @@ import BlogForm from './pages/admin/BlogForm';
 import Settings from './pages/admin/Settings';
 import NetworkAdmin from './pages/admin/NetworkAdmin';
 import ContactList from './pages/admin/ContactList';
+import NotFound from './pages/NotFound';
 
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -74,6 +75,7 @@ const AppContent = () => {
         <Route path="/blog/:slug" element={<BlogDetailPage />} />
 
         {/* Admin Routes */}
+        <Route path="/admin/login" element={<NotFound />} />
         <Route path="/access-xresizer-secure-portal" element={<AdminLogin />} />
         <Route
           path="/admin/*"
@@ -96,7 +98,7 @@ const AppContent = () => {
         />
 
         {/* Catch all */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       {!isAdmin && <Footer />}
       <CookieConsent onAccept={handleCookieAccept} />

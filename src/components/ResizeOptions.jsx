@@ -4,8 +4,8 @@ import { Settings2, Download, Zap, Sparkles, HardDrive, Printer, Info } from 'lu
 import { api } from '../services/api';
 
 const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, crop, rotation, initialMaxSizeKB = null }) => {
-    const [width, setWidth] = useState(1920);
-    const [height, setHeight] = useState(1080);
+    const [width, setWidth] = useState(initialDimensions?.width || '');
+    const [height, setHeight] = useState(initialDimensions?.height || '');
     const [unit, setUnit] = useState('px');
     const [mode, setMode] = useState('stretch');
     const [format, setFormat] = useState('jpeg');
@@ -23,9 +23,9 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
     useEffect(() => {
         if (imageFile?.name !== lastImageName.current) {
             lastImageName.current = imageFile?.name;
-            if (initialDimensions?.width && initialDimensions?.height) {
-                setWidth(initialDimensions.width);
-                setHeight(initialDimensions.height);
+            if (initialDimensions?.width !== undefined && initialDimensions?.height !== undefined) {
+                setWidth(initialDimensions.width || '');
+                setHeight(initialDimensions.height || '');
                 setError(null);
             }
         }

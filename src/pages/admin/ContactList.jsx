@@ -63,24 +63,21 @@ const ContactList = () => {
 
     const renderMessageContent = (contact) => {
         const isExpanded = expandedMessages.has(contact._id);
-        const words = contact.message.split(' ');
-        const isLong = words.length > 50;
-
-        if (!isLong) {
-            return <p className="text-xs text-[#8A244B]/50 line-clamp-2">{contact.message}</p>;
-        }
+        const isLong = contact.message.length > 100 || contact.message.split(/\s+/).length > 20;
 
         return (
             <div className="text-xs">
-                <p className={`text-[#8A244B]/50 ${isExpanded ? '' : 'line-clamp-2'}`}>
-                    {isExpanded ? contact.message : words.slice(0, 50).join(' ') + '...'}
+                <p className={`text-[#8A244B]/50 transition-all duration-300 break-words whitespace-pre-wrap ${isExpanded ? '' : 'line-clamp-2'}`}>
+                    {contact.message}
                 </p>
-                <button
-                    onClick={() => toggleMessage(contact._id)}
-                    className="text-[#D02752] font-bold mt-1 hover:underline focus:outline-none"
-                >
-                    {isExpanded ? 'Read Less' : 'Read More'}
-                </button>
+                {isLong && (
+                    <button
+                        onClick={() => toggleMessage(contact._id)}
+                        className="text-[#D02752] font-bold mt-1 hover:underline focus:outline-none block"
+                    >
+                        {isExpanded ? 'Read Less' : 'Read More'}
+                    </button>
+                )}
             </div>
         );
     };
@@ -101,8 +98,8 @@ const ContactList = () => {
                             <tr className="text-[#8A244B]/50 text-xs font-bold uppercase tracking-wider border-b border-[#D02752]/5">
                                 <th className="pb-4 pl-4">Status</th>
                                 <th className="pb-4">Sender</th>
-                                <th className="pb-4">Subject</th>
-                                <th className="pb-4">Date</th>
+                                <th className="pb-4 pr-12">Subject</th>
+                                <th className="pb-4 pl-4">Date</th>
                                 <th className="pb-4 text-right pr-4">Actions</th>
                             </tr>
                         </thead>
@@ -135,11 +132,11 @@ const ContactList = () => {
                                                 <span className="text-xs text-[#8A244B]/50 font-normal">{contact.email}</span>
                                             </div>
                                         </td>
-                                        <td className="py-4 max-w-xs text-[#8A244B]/80">
+                                        <td className="py-4 pr-12 min-w-[300px] max-w-md text-[#8A244B]/80">
                                             <p className="font-medium text-sm mb-1">{contact.subject}</p>
                                             {renderMessageContent(contact)}
                                         </td>
-                                        <td className="py-4 text-sm text-[#8A244B]/60">
+                                        <td className="py-4 pl-4 text-sm text-[#8A244B]/60">
                                             {new Date(contact.createdAt).toLocaleDateString()}
                                         </td>
                                         <td className="py-4 pr-4 text-right space-x-2">

@@ -250,7 +250,7 @@ function Home() {
                                     <ResizeOptions
                                         onResize={handleResizeUpdate}
                                         imageFile={imageData?.file}
-                                        initialDimensions={{ width: imageData?.width || 1920, height: imageData?.height || 1080 }}
+                                        initialDimensions={{ width: imageData?.width, height: imageData?.height }}
                                         previewSize={imageData?.previewSize}
                                         crop={crop}
                                         rotation={rotation}

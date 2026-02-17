@@ -306,22 +306,39 @@ const ImageUploader = ({ onUpload, onRemove, externalImage, crop, setCrop, rotat
                                     minHeight={50}
                                     disabled={!isCropping}
                                     keepSelection={true}
-                                    style={{ maxHeight: '600px', maxWidth: '100%' }}
+                                    style={{
+                                        maxHeight: '600px',
+                                        maxWidth: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
                                 >
-                                    <img
-                                        ref={onImageLoad}
-                                        src={externalImage.previewUrl}
-                                        alt="Preview"
-                                        style={{
-                                            transform: `rotate(${rotation}deg)`,
-                                            maxWidth: '100%',
-                                            maxHeight: '600px',
-                                            display: 'block',
-                                            width: 'auto',
-                                            height: 'auto'
-                                        }}
-                                        className="object-contain"
-                                    />
+                                    <div style={{
+                                        position: 'relative',
+                                        width: (rotation / 90) % 2 !== 0 ? '600px' : 'auto',
+                                        height: (rotation / 90) % 2 !== 0 ? 'auto' : 'auto',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        padding: (rotation / 90) % 2 !== 0 ? '100px 0' : '0' // Extra room for portrait rotation
+                                    }}>
+                                        <img
+                                            ref={onImageLoad}
+                                            src={externalImage.previewUrl}
+                                            alt="Preview"
+                                            style={{
+                                                transform: `rotate(${rotation}deg)`,
+                                                maxWidth: (rotation / 90) % 2 !== 0 ? '400px' : '100%',
+                                                maxHeight: (rotation / 90) % 2 !== 0 ? '100%' : '600px',
+                                                display: 'block',
+                                                width: 'auto',
+                                                height: 'auto',
+                                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+                                            }}
+                                            className="object-contain"
+                                        />
+                                    </div>
                                 </ReactCrop>
                             </div>
 
