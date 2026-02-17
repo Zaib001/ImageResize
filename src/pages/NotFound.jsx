@@ -2,10 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const NotFound = () => {
     return (
         <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden">
+            <Helmet>
+                <title>404 - Page Not Found | xResizer</title>
+                <meta name="prerender-status-code" content="404" />
+                <meta name="robots" content="noindex" />
+            </Helmet>
             {/* Background Decoration */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#F63049] opacity-[0.03] blur-[120px]" />

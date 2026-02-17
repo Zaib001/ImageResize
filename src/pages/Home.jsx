@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import SEOHead from '../components/SEOHead';
 import { api } from '../services/api';
 import 'react-image-crop/dist/ReactCrop.css';
+import NotFound from './NotFound';
 
 function Home() {
     const [imageData, setImageData] = useState(null);
@@ -46,6 +47,11 @@ function Home() {
             desc: 'Compress photo to 100KB online free. Resize JPG images for forms and website uploads without losing quality using xResizer.'
         }
     };
+
+    // If targetSlug exists but is not in seoMap, render NotFound
+    if (targetSlug && !seoMap[targetSlug]) {
+        return <NotFound />;
+    }
 
     const currentSeo = seoMap[targetSlug] || {
         kb: null,

@@ -141,7 +141,12 @@ const ResizeOptions = ({ onResize, imageFile, initialDimensions, previewSize, cr
 
         } catch (err) {
             console.error("Download failed", err);
-            alert(`❌ Download failed: ${err.message}`);
+
+            if (err.response && err.response.status === 429) {
+                alert('⚠️ Too many requests. Please wait a moment and try again.');
+            } else {
+                alert(`❌ Download failed: ${err.message}`);
+            }
         } finally {
             setIsProcessing(false);
         }
