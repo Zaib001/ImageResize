@@ -1,0 +1,20 @@
+# Render static site redirects
+
+# Proxy sitemap and robots to backend
+/sitemap.xml  https://xresize-backend.onrender.com/sitemap.xml  200
+/robots.txt   https://xresize-backend.onrender.com/robots.txt   200
+
+# SEO routes — serve per-route index.html with injected meta tags
+# These MUST come before the /* catchall
+/blog                 /blog/index.html                200
+/about                /about/index.html               200
+/privacy              /privacy/index.html             200
+/terms                /terms/index.html               200
+/compress-jpg-to-10kb   /compress-jpg-to-10kb/index.html    200
+/compress-jpg-to-20kb   /compress-jpg-to-20kb/index.html    200
+/compress-jpg-to-30kb   /compress-jpg-to-30kb/index.html    200
+/compress-jpg-to-50kb   /compress-jpg-to-50kb/index.html    200
+/compress-jpg-to-100kb  /compress-jpg-to-100kb/index.html   200
+
+# SPA fallback — all other routes (dynamic pages, admin, etc.)
+/*  /index.html  200
